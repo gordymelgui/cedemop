@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Cedemop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Quill.js Editor Core + Snow Theme -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <style>
+        body {
+            background-color: #f1f5f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-nav {
+            background: var(--dark-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .admin-container {
+            max-width: 800px;
+            margin: 40px auto;
+            width: 100%;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .form-control,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .btn-upload {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .btn-upload:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Hidden states */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        #login-section {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+
+        /* Editor Styles */
+        #editor-container {
+            height: 300px;
+            background: white;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            font-family: inherit;
+        }
+
+        .ql-toolbar.ql-snow {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            background: #f8fafc;
+        }
+
+        /* Grid Layouts para formularios más anchos */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #f1f5f9;
+        }
+    </style>
+    <script type="module" src="js/admin.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Admin Nav (Visible Only After Login) -->
+    <nav id="admin-nav" class="admin-nav hidden">
+        <div class="logo">Cedemop Admin</div>
+        <button id="logout-btn" class="btn-logout">Cerrar Sesión</button>
+    </nav>
+
+    <div class="admin-container">
+
+        <!-- Login Section -->
+        <div id="login-section" class="card">
+            <h2 class="mb-4 text-center">Acceso Administrativo</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="admin@cedemop.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-upload">Ingresar</button>
+                <p id="login-error" class="text-red-500 mt-2 text-sm hidden" style="color: #ef4444;">Credenciales
+                    incorrectas</p>
+            </form>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="hidden">
+            <div class="card">
+                <h2 class="mb-4">Gestor de Contenido</h2>
+
+                <div class="tabs">
+                    <button class="tab-btn" data-target="course-form">Subir Curso/Aula</button>
+                    <button class="tab-btn" data-target="resource-form">Subir Recurso</button>
+                    <button class="tab-btn" data-target="blog-form">Subir Blog</button>
+                </div>
+
+                <!-- Course Upload Form -->
+                <form id="content-form">
+
+                    <div class="form-row">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Categoría / Destino</label>
+                            <select id="content-type" class="form-control" required>
+                                <option value="" disabled selected>Selecciona dónde se publicará...</option>
+                                <option value="blog">Artículos (Blog)</option>
+                                <option value="recurso_paciente">Recursos para Pacientes (PDF/Material)</option>
+                                <option value="recurso_profesional">Recursos para Profesionales (PDF/Material)</option>
+                                <option value="curso">Curso / Taller (Próximamente)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label>Autor / Staff</label>
+                            <input type="text" id="author" class="form-control" placeholder="Ej: Dra. María Gómez"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Título Principal</label>
+                        <input type="text" id="title" class="form-control"
+                            placeholder="Ej: La importancia del acompañamiento..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-link"></i> Enlace Externo (Opcional)</label>
+                        <input type="url" id="external-url" class="form-control"
+                            placeholder="Ej: https://misitioweb.com/articulo (Dejar vacío si es un artículo interno)">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-image"></i> Imagen de Portada (Obligatoria)</label>
+                            <div class="upload-area" onclick="document.getElementById('image-file').click()">
+                                <i class="fas fa-cloud-upload-alt fa-2x mb-2" style="color: var(--primary)"></i>
+                                <p>Haz clic para subir portada (JPG, PNG)</p>
+                                <input type="file" id="image-file" accept="image/*" style="display: none;" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-file-pdf"></i> Archivo Adjunto (Opcional)</label>
+                            <div class="upload-area" onclick="document.getElementById('doc-file').click()">
+                                <i class="fas fa-file-alt fa-2x mb-2" style="color: var(--primary)"></i>
+                                <p>Haz clic para subir PDF o Word (Opcional)</p>
+                                <input type="file" id="doc-file" accept=".pdf,.doc,.docx" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contenido del Artículo</label>
+                        <!-- Quill Editor Container -->
+                        <div id="editor-container"></div>
+                        <!-- Hidden input to store HTML content for form submission -->
+                        <input type="hidden" id="rich-content" name="rich-content">
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div id="upload-progress" class="hidden" style="margin-bottom: 15px;">
+                        <label>Subiendo a la base de datos...</label>
+                        <div style="background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden;">
+                            <div id="progress-bar"
+                                style="background: var(--primary); width: 0%; height: 100%; transition: width 0.3s;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-upload"><i class="fas fa-paper-plane"></i> Publicar
+                        Contenido</button>
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-message" class="card hidden"
+                style="background: #dcfce7; color: #166534; text-align: center;">
+                <h3><i class="fas fa-check-circle"></i> ¡Contenido Publicado!</h3>
+                <p>El material ya está visible en la página correspondiente.</p>
+                <button onclick="window.location.reload()" style="margin-top:10px; padding:5px 10px;">Subir
+                    otro</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Inicializar el Editor Quill.js de Texto Enriquecido
+        var quill = new Quill('#editor-container', {
+            theme: 'snow',
+            placeholder: 'Escribe aquí tu artículo, incluye enlaces, listas o sube videos...',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],        // Estilos de texto
+                    [{ 'color': [] }, { 'background': [] }],          // Colores
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],     // Listas
+                    [{ 'align': [] }],                                // Alineación
+                    ['link', 'image', 'video'],                       // Inserción multimedia
+                    ['clean']                                         // Eliminar formato
+                ]
+            }
+        });
+
+        // Actualizar visualmente el nombre del archivo seleccionado en las cajas punteadas
+        document.getElementById('image-file').addEventListener('change', function (e) {
+            let fileName = e.target.files[0] ? e.target.files[0].name : "Haz clic para subir portada (JPG, PNG)";
+            e.target.previousElementSibling.innerText = fileName;
+        });
+
+        document.getElementById('doc-file').addEventListener('change', function (e) {
+            let fileName = e.target.files[0] ? e.target.files[0].name : "Haz clic para subir PDF o Word (Opcional)";
+            e.target.previousElementSibling.innerText = fileName;
+        });
+    </script>
+</body>
+
+</html>

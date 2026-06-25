@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Virtual - CEDEMOP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+    <header class="site-header glass-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://cedemop.com/wp-content/uploads/2024/02/logos-cedemop-03-BLANCO-1024x410.png"
+                        alt="CEDEMOP">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Nosotros <i class="fas fa-chevron-down text-xs"></i></a>
+                        <ul class="dropdown-content glass-dropdown">
+                            <li><a href="about.html">Quiénes Somos</a></li>
+                            <li><a href="staff.html">Nuestro Equipo</a></li>
+                            <li><a href="corporate.html">Alianzas Institucionales</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Pacientes <i class="fas fa-chevron-down text-xs"></i></a>
+                        <ul class="dropdown-content glass-dropdown">
+                            <li><a href="psychotherapy.html">Psicoterapia Online</a></li>
+                            <li><a href="resources_patients.html">Recursos Gratuitos</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Profesionales <i
+                                class="fas fa-chevron-down text-xs"></i></a>
+                        <ul class="dropdown-content glass-dropdown">
+                            <li><a href="courses.html">Aula Virtual & Cursos</a></li>
+                            <li><a href="supervision.html">Supervisiones Clínicas</a></li>
+                            <li><a href="resources_pros.html">Biblioteca Digital</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html" class="nav-btn-highlight">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section-padding-lg text-center bg-light">
+        <div class="container">
+            <span class="badge-pill" style="background:var(--primary); color:white; border:none;">Formación
+                Profesional</span>
+            <h1 class="mb-4">Aula Virtual</h1>
+            <p style="max-width:600px; margin:0 auto;">Accede a nuestros programas académicos y especializaciones.</p>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" style="text-align: center; color: var(--text-light);">
+                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                <p>Cargando cursos...</p>
+            </div>
+
+            <!-- Dynamic Container -->
+            <div id="courses-grid" class="grid-3">
+                <!-- Javascript will inject cards here -->
+            </div>
+
+            <div id="empty-state" class="hidden text-center" style="grid-column: 1/-1; padding: 40px;">
+                <p>No hay cursos publicados por el momento.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer-premium">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h4>CEDEMOP</h4>
+                <p>&copy; 2026 CEDEMOP.</p>
+            </div>
+            <div class="footer-links">
+                <!-- empty for simplicity per design -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic to fetch Courses -->
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const grid = document.getElementById('courses-grid');
+        const loading = document.getElementById('loading-indicator');
+        const emptyState = document.getElementById('empty-state');
+
+        async function loadCourses() {
+            try {
+                const q = query(collection(db, "courses"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                loading.classList.add('hidden');
+
+                if (querySnapshot.empty) {
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const card = document.createElement('div');
+                    card.className = 'glass-card';
+
+                    const imgUrl = data.imageUrl || 'https://via.placeholder.com/400x250?text=Curso+Cedemop';
+
+                    card.innerHTML = `
+                        <div style="height: 200px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
+                            <img src="${imgUrl}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3>${data.title}</h3>
+                        <p>${data.description}</p>
+                        ${data.docUrl ? `<a href="${data.docUrl}" target="_blank" class="btn-primary-glass" style="display:inline-block; font-size:0.9rem; padding: 10px 20px;">Ver Programa / Inscribirse</a>` : ''}
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Error loading courses:", error);
+                loading.innerHTML = `<p style="color:red">Error cargando contenido. Verifica la configuración de Firebase.</p>`;
+            }
+        }
+
+        loadCourses();
+    </script>
+
+    <style>
+        .hidden {
+            display: none !important;
+        }
+    </style>
+
+</body>
+
+</html>
