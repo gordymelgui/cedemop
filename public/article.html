@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículo - CEDEMOP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Quill Snow CSS para renderizar el contenido enriquecido correctamente -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    
+    <script src="js/script.js" defer></script>
+    <script type="module" src="js/auth-nav.js" defer></script>
+
+    <style>
+        .article-hero {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: calc(var(--header-height) + 120px) 20px 80px;
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Oscurecer imagen de fondo para mejor lectura */
+            z-index: 1;
+        }
+
+        .article-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .article-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .article-body {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+        
+        /* Ajustar el renderizado interno de lo generado por Quill js */
+        .article-body h1, .article-body h2, .article-body h3 {
+            color: var(--primary-dark);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .article-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .article-body p {
+            margin-bottom: 20px;
+        }
+
+        .article-body blockquote {
+            border-left: 5px solid var(--accent);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #64748b;
+            font-size: 1.3rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 50px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        /* Skeleton loader animado */
+        .skeleton {
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        .skeleton-title { height: 40px; width: 80%; margin: 0 auto 20px; }
+        .skeleton-text { height: 20px; width: 100%; }
+        .skeleton-text.short { width: 70%; }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header glass-header" style="background: rgba(43, 8, 77, 0.95);">
+        <!-- Header container con el menú (Simplificado para el ejemplo) -->
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://cedemop.com/wp-content/uploads/2024/02/logos-cedemop-03-BLANCO-1024x410.png"
+                        alt="CEDEMOP Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Cedemop</a>
+                        <ul class="dropdown-content">
+                            <li><a href="about.html">Sobre Nosotros</a></li>
+                            <li><a href="staff.html">Staff</a></li>
+                            <li><a href="corporate.html">Instituciones</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contacto</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Pacientes y Familiares</a>
+                        <ul class="dropdown-content">
+                            <li><a href="psychotherapy.html">Psicoterapia</a></li>
+                            <li><a href="resources_patients.html">Recursos</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Profesionales</a>
+                        <ul class="dropdown-content">
+                            <li><a href="courses.html">Catálogo de Cursos</a></li>
+                            <li><a href="aula.html">Clase en Vivo (Test)</a></li>
+                            <li><a href="resources_pros.html">Recursos</a></li>
+                            <li><a href="supervision.html">Supervisiones</a></li>
+                        </ul>
+                    </li>
+                    <li id="auth-ui">
+                        <a href="admin.html" class="nav-btn-highlight"><i class="fas fa-user-circle"></i> Ingresar</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT INJECTED BY JAVASCRIPT -->
+    <main id="article-app">
+        <!-- Skeleton Loader -->
+        <div class="article-hero" style="background-color: #1e293b;">
+            <div class="article-hero-content">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-title" style="width: 50%;"></div>
+            </div>
+        </div>
+        <div class="article-body">
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text short"></div>
+            <br>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text short"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 CEDEMOP. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Script -->
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const articleApp = document.getElementById("article-app");
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+
+            if (!articleId) {
+                renderError("Artículo no especificado. Vuelve a la página principal.");
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "blog", articleId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    renderArticle(data);
+                } else {
+                    renderError("El artículo solicitado no existe o fue eliminado.");
+                }
+            } catch (error) {
+                console.error("Error al obtener el documento:", error);
+                renderError("Error al cargar el artículo. Intenta nuevamente más tarde.");
+            }
+        });
+
+        function renderArticle(data) {
+            const date = data.createdAt ? new Date(data.createdAt.toMillis()).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Reciente';
+            const author = data.author || 'CEDEMOP';
+            const bgImage = data.imageUrl || 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80';
+
+            // Actualizar el título de la pestaña del navegador
+            document.title = data.title + " - CEDEMOP Blog";
+
+            const html = `
+                <div class="article-hero" style="background-image: url('${bgImage}');">
+                    <div class="article-hero-content">
+                        <h1>${data.title}</h1>
+                        <div class="article-meta">
+                            <span><i class="fas fa-user-circle"></i> Por ${author}</span>
+                            <span><i class="fas fa-calendar-alt"></i> ${date}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-body ql-editor">
+                    <!-- Contenido enriquecido de Quill JS (Seguro porque es administrado internamente) -->
+                    ${data.content}
+
+                    ${data.docUrl ? `
+                        <div style="margin-top: 40px; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <h3 style="margin: 0 0 5px 0; color: var(--text-main); font-size: 1.2rem;"><i class="fas fa-file-pdf" style="color: #ef4444; margin-right: 10px;"></i> Material Adjunto</h3>
+                                <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Documento de apoyo para este tema.</p>
+                            </div>
+                            <a href="${data.docUrl}" target="_blank" class="btn-primary" style="padding: 10px 20px;"><i class="fas fa-download"></i> Descargar</a>
+                        </div>
+                    ` : ''}
+
+                    <div style="text-align: center;">
+                        <a href="blog.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver a Todos los Artículos</a>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('article-app').innerHTML = html;
+        }
+
+        function renderError(message) {
+            document.getElementById('article-app').innerHTML = `
+                <div style="padding: 150px 20px; text-align: center; color: var(--text-main);">
+                    <i class="fas fa-exclamation-triangle fa-4x" style="color: #ef4444; margin-bottom: 20px;"></i>
+                    <h2 style="margin-bottom: 10px;">Oops, algo salió mal</h2>
+                    <p style="font-size: 1.2rem; color: var(--text-light);">${message}</p>
+                    <a href="blog.html" class="btn-primary" style="margin-top: 20px; display: inline-block;">Volver al Blog</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>

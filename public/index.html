@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEDEMOP - Centro de Promoción de Salud Mental</title>
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/auth-nav.js" defer></script>
+  <script type="module" src="js/load-blogs.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header glass-header">
+    <div class="container header-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="https://cedemop.com/wp-content/uploads/2024/02/logos-cedemop-03-BLANCO-1024x410.png"
+            alt="CEDEMOP Logo">
+        </a>
+      </div>
+      <nav class="main-nav">
+        <button class="mobile-menu-toggle" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-trigger">Cedemop</a>
+            <ul class="dropdown-content">
+              <li><a href="about.html">Sobre Nosotros</a></li>
+              <li><a href="staff.html">Staff</a></li>
+              <li><a href="corporate.html">Instituciones</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contact.html">Contacto</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-trigger">Pacientes y Familiares</a>
+            <ul class="dropdown-content">
+              <li><a href="psychotherapy.html">Psicoterapia</a></li>
+              <li><a href="resources_patients.html">Recursos</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-trigger">Profesionales</a>
+            <ul class="dropdown-content">
+              <li><a href="courses.html">Catálogo de Cursos</a></li>
+              <li><a href="aula.html">Clase en Vivo (Test)</a></li>
+              <li><a href="resources_pros.html">Recursos</a></li>
+              <li><a href="supervision.html">Supervisiones</a></li>
+            </ul>
+          </li>
+
+          <!-- Contenedor Dinámico para Auth y Admin -->
+          <li id="auth-ui">
+            <a href="admin.html" class="nav-btn-highlight"><i class="fas fa-user-circle"></i> Ingresar</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section (Split Layout) -->
+  <section class="hero-section">
+    <div class="hero-split-container">
+      <div class="hero-text-side reveal">
+        <h1>Promoviendo la Salud Mental con Ciencia y Empatía</h1>
+        <p>Programas de capacitación, psicoterapia y recursos especializados para profesionales y pacientes.</p>
+        <div class="hero-btns">
+          <a href="#services" class="btn-hero">Nuestros Servicios</a>
+          <a href="contact.html" class="btn-hero-secondary dark-text">Contáctanos</a>
+        </div>
+      </div>
+      <div class="hero-image-side">
+        <img src="imagenes/banner cedemop.png" alt="CEDEMOP Hero Banner">
+      </div>
+    </div>
+  </section>
+
+  <!-- Help Carousel Section -->
+  <section class="help-carousel-section reveal">
+    <div class="container">
+      <div class="help-slider">
+        <!-- Slide 1 -->
+        <div class="help-slide active">
+          <div class="help-image">
+            <img src="https://cedemop.com/wp-content/uploads/2024/02/portrait-happy-senior-couple-arms-scaled.jpg"
+              alt="Estamos para ayudar">
+          </div>
+          <div class="help-content">
+            <span class="section-subtitle">Compromiso</span>
+            <h2>Estamos Para Ayudar</h2>
+            <p>Brindamos apoyo integral y profesional para mejorar la calidad de vida de nuestros pacientes. Nuestro
+              enfoque se basa en la evidencia científica y la calidez humana.</p>
+            <a href="contact.html" class="btn-help">SOLICITAR INFORMACIÓN</a>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="help-slide">
+          <div class="help-image">
+            <img src="https://cedemop.com/wp-content/uploads/2024/02/young-beautiful-woman-lying-by-lake-1-scaled.jpg"
+              alt="Bienestar Emocional">
+          </div>
+          <div class="help-content">
+            <span class="section-subtitle">Bienestar</span>
+            <h2>Equilibrio y Salud Mental</h2>
+            <p>Descubre herramientas para el manejo del estrés y la ansiedad en nuestra vida diaria, construyendo un
+              futuro más saludable y pleno.</p>
+            <a href="contact.html" class="btn-help">CONOCE MÁS</a>
+          </div>
+        </div>
+
+        <div class="help-controls">
+          <button class="prev-slide" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+          <button class="next-slide" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <div class="help-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section section-padding reveal">
+    <div class="container grid-2">
+      <div class="about-text">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos un centro comprometido en la promoción de la salud mental con respaldo científico y enfoque crítico a
+          través de implementación y desarrollo de programas de capacitación de cursos y diplomaturas para profesionales
+          y estudiantes de Psicología, Trabajo Social, Pedagogía y otras áreas del Desarrollo Humano.</p>
+        <p>Desarrollamos charlas y programas de intervención para instituciones de: educación; salud; niñez,
+          adolescencia y familia; y empresas en general. Además, ofrecemos servicios de psicoterapia virtual y
+          presencial.</p>
+        <p><strong>CEDEMOP</strong> está conformado por profesionales de Chile, Paraguay, Colombia, Ecuador, Cuba,
+          Argentina, Bolivia, Perú, España, Alemania, entre otros.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://cedemop.com/wp-content/uploads/2024/02/mental-health-care-sketch-diagram-1-1024x761.jpg"
+          alt="Salud Mental Diagrama">
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section class="quote-section">
+    <div class="container">
+      <blockquote>
+        "La educación emocional cultiva la empatía, construyendo puentes de conexión entre las personas"
+        <cite>Daniel Goleman</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Services / Talleres -->
+  <section id="services" class="services-section section-padding reveal">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nuestros Servicios</h2>
+        <p>Soluciones integrales para el bienestar emocional y el desarrollo profesional.</p>
+      </div>
+      <div class="grid-3">
+        <div class="service-card">
+          <i class="fas fa-brain"></i>
+          <h3>Funciones Ejecutivas en el Aprendizaje</h3>
+          <p>Claves para la intervención dentro y fuera del aula.</p>
+          <a href="courses.html" class="btn-primary" style="margin-top: 15px; display: inline-block;">Ver Curso</a>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-hands-helping"></i>
+          <h3>Intervención en Trauma y Disociación</h3>
+          <p>Estrategias y técnicas de intervención un modelo integrador.</p>
+          <a href="courses.html" class="btn-primary" style="margin-top: 15px; display: inline-block;">Ver Curso</a>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-puzzle-piece"></i>
+          <h3>Neuroeducación</h3>
+          <p>Preguntas y respuestas sobre neuroeducación y su aplicación.</p>
+          <a href="courses.html" class="btn-primary" style="margin-top: 15px; display: inline-block;">Ver Webinar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog" class="blog-section section-padding reveal">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nuestro Blog</h2>
+        <p>Novedades y artículos de interés sobre salud mental.</p>
+      </div>
+      <div class="blog-grid" id="blog-container">
+        <!-- Loader / Skeleton while fetching -->
+        <p style="text-align: center; width: 100%; color: var(--text-light);">Cargando artículos recientes...</p>
+      </div>
+      <!-- Add a link to the full blog page -->
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="blog.html" class="btn-primary" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">Ver Todos los Artículos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section section-padding">
+    <div class="container">
+      <h2>Comunicación Positiva</h2>
+      <div class="video-wrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/cVB3brOy4YU" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA Section -->
+  <section class="quote-section">
+    <div class="container">
+      <blockquote>
+        "¿Necesitas ayuda o más información?"
+        <cite style="color: rgba(255,255,255,0.8); margin-top: 10px; font-style: normal;">Contáctanos hoy mismo para
+          comenzar</cite>
+      </blockquote>
+      <a href="contact.html" class="btn-hero"
+        style="background: var(--dark-bg); margin-top: 40px; border: 1px solid rgba(255,255,255,0.2);">Ir a la página de
+        Contacto</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CEDEMOP. Todos los derechos reservados.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <!-- Reveal Animation Script -->
+    <script>
+      function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 100;
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          }
+        }
+      }
+      window.addEventListener("scroll", reveal);
+      // Para activar los primeros elementos inmediatamente
+      reveal();
+    </script>
+</body>
+
+</html>
