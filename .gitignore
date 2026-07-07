@@ -1,3 +1,4 @@
 node_modules/
 .vscode/
 .firebase/
+public/js/firebase-config.js
