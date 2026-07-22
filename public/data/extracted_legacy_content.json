@@ -1,117 +1,180 @@
 {
-  "coursesSummary": [
+  "courses": [
     {
-      "title": "Curso de Prueba"
+      "id": "1548",
+      "title": "dynamic-content-megamenu-menuitem1326",
+      "date": "2024-02-15 15:06:23",
+      "contentSummary": "<h2>\\n\t\t\t\t\t\tCedemop\\n\t\t\t\t\t</h2>\t\t\\n\t\t\t\t\t\t<a href=\\\"https://cedemop.com/index.php/sobre-nosotros/\\\" target=\\\"_blank\\\" rel=\\\"nofollow noopener\\\">\\n\t\t\t\t\t\t\t\t\tSobre Nosotros\\n\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\\n\t\t\t\t\t\t<a href=\\\"https://cedemop.com/index.php/blog/\\\" target=\\\"_blank\\\" rel=\\\"nofollow noopener\\\">\\n\t\t\t\t\t\t\t\t\tBl"
     },
     {
-      "title": "Sample course"
+      "id": "1620",
+      "title": "Curso de Prueba",
+      "date": "2024-02-15 16:00:36",
+      "contentSummary": "Esta es la descripción del curso"
     }
   ],
   "lessonsCount": 66,
   "sampleLessons": [
     {
-      "title": "Conceptos introductorios."
+      "id": "1626",
+      "title": "Conceptos introductorios.",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 2"
+      "id": "1627",
+      "title": "Lesson 2",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 3"
+      "id": "1628",
+      "title": "Lesson 3",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 4"
+      "id": "1629",
+      "title": "Lesson 4",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 5"
+      "id": "1630",
+      "title": "Lesson 5",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 6"
+      "id": "1631",
+      "title": "Lesson 6",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 7"
+      "id": "1632",
+      "title": "Lesson 7",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 8"
+      "id": "1633",
+      "title": "Lesson 8",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 9"
+      "id": "1634",
+      "title": "Lesson 9",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 10"
+      "id": "1635",
+      "title": "Lesson 10",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 11"
+      "id": "1647",
+      "title": "Lesson 11",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 12"
+      "id": "1648",
+      "title": "Lesson 12",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 13"
+      "id": "1649",
+      "title": "Lesson 13",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 14"
+      "id": "1650",
+      "title": "Lesson 14",
+      "date": "2024-02-15 16:32:48"
     },
     {
-      "title": "Lesson 15"
-    },
-    {
-      "title": "Lesson 16"
-    },
-    {
-      "title": "Lesson 17"
-    },
-    {
-      "title": "Lesson 18"
-    },
-    {
-      "title": "Lesson 19"
-    },
-    {
-      "title": "Lesson 20"
+      "id": "1651",
+      "title": "Lesson 15",
+      "date": "2024-02-15 16:32:48"
     }
   ],
-  "pagesSummary": [
+  "pages": [
     {
-      "title": "Blog"
+      "id": "17",
+      "title": "astra",
+      "type": "page",
+      "date": "2023-08-04 23:43:09"
     },
     {
-      "title": "Home"
+      "id": "1083",
+      "title": "Home",
+      "type": "page",
+      "date": "2021-02-15 01:32:01"
     },
     {
-      "title": "Día Mundial de la Prevención del Suicidio"
+      "id": "1100",
+      "title": "Home",
+      "type": "post",
+      "date": "2023-08-28 21:54:47"
     },
     {
-      "title": "Contacto"
+      "id": "1214",
+      "title": "placeholder-706.png",
+      "type": "page",
+      "date": "2024-02-09 10:51:00"
     },
     {
-      "title": "Menú"
+      "id": "1261",
+      "title": "Home",
+      "type": "page",
+      "date": "2024-02-09 11:43:02"
     },
     {
-      "title": "Sobre Nosotros"
+      "id": "1354",
+      "title": "Mega Menu Cedemop",
+      "type": "page",
+      "date": "2024-02-09 13:24:44"
     },
     {
-      "title": "Checkout"
+      "id": "1528",
+      "title": "Carrusel Freedom Girl",
+      "type": "page",
+      "date": "2024-02-15 13:18:57"
     },
     {
-      "title": "Profile"
+      "id": "1542",
+      "title": "Profile",
+      "type": "page",
+      "date": "2024-02-15 14:45:19"
     },
     {
-      "title": "All Courses"
+      "id": "1543",
+      "title": "All Courses",
+      "type": "page",
+      "date": "2024-02-15 14:45:19"
     },
     {
-      "title": "Instructors"
+      "id": "1544",
+      "title": "Instructors",
+      "type": "page",
+      "date": "2024-02-15 14:45:19"
     },
     {
-      "title": "Instructor"
+      "id": "1545",
+      "title": "Instructor",
+      "type": "page",
+      "date": "2024-02-15 14:45:19"
     },
     {
-      "title": "Become A Teacher"
+      "id": "1546",
+      "title": "Become A Teacher",
+      "type": "page",
+      "date": "2024-02-15 14:45:19"
     },
     {
-      "title": "Term Conditions"
+      "id": "1547",
+      "title": "Term Conditions",
+      "type": "page",
+      "date": "2024-02-15 14:45:19"
     },
     {
-      "title": "Staff"
+      "id": "1769",
+      "title": "dynamic-content-megamenu-menuitem1326",
+      "type": "page",
+      "date": "2024-02-15 16:34:57"
     }
   ]
 }
