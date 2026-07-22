@@ -1,215 +1,173 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diplomatura en Psicología Positiva - CEDEMOP</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="js/script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de Formación - CEDEMOP</title>
+
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "secondary": "#904c2f"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)",
+            "ethereal-hover": "0 30px 60px rgba(45, 79, 66, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-content {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+  </style>
+
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/auth-nav.js" defer></script>
 </head>
 
-<body>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
 
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html" class="flex items-center shrink-0 bg-primary px-4 py-2 rounded-2xl shadow-sm border border-primary-container hover:bg-primary/95 transition-all duration-300">
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center shrink-0 bg-primary px-4 py-2 rounded-2xl shadow-sm border border-primary-container hover:bg-primary/95 transition-all duration-300">
         <img src="logo.png" alt="CEDEMOP Logo" class="h-9 md:h-11 w-auto object-contain">
       </a>
-            </div>
-            <nav class="main-nav">
-                <button class="mobile-menu-toggle" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Cedemop</a>
-                        <ul class="dropdown-content">
-                            <li><a href="about.html">Sobre Nosotros</a></li>
-                            <li><a href="staff.html">Staff</a></li>
-                            <li><a href="corporate.html">Instituciones</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contacto</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Pacientes y Familiares</a>
-                        <ul class="dropdown-content">
-                            <li><a href="psychotherapy.html">Psicoterapia</a></li>
-                            <li><a href="resources_patients.html">Recursos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Profesionales</a>
-                        <ul class="dropdown-content active">
-                            <li><a href="courses.html">Aula Virtual</a></li>
-                            <li><a href="resources_pros.html">Recursos</a></li>
-                            <li><a href="supervision.html">Supervisiones</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-body text-base text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Cedemop <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-52 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Sobre Nosotros</a>
+            <a href="staff.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Staff Profesional</a>
+            <a href="corporate.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Instituciones</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Blog & Noticias</a>
+            <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Contacto</a>
+          </div>
         </div>
-    </header>
 
-    <!-- Course Header -->
-    <section class="course-header-section">
-        <div class="container">
-            <span
-                style="background: var(--primary-color); color: #000; padding: 5px 10px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; margin-bottom: 10px; display: inline-block;">Salud
-                Mental</span>
-            <h1>Diplomatura en Psicología Positiva</h1>
-            <div class="course-meta">
-                <span><i class="far fa-clock"></i> 12 Semanas</span>
-                <span><i class="fas fa-level-up-alt"></i> Intermedio</span>
-                <span><i class="fas fa-book-open"></i> 24 Lecciones</span>
-                <span><i class="fas fa-graduation-cap"></i> 150 Estudiantes</span>
-            </div>
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Pacientes <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="psychotherapy.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Psicoterapia Online</a>
+            <a href="resources_patients.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Recursos & Libros</a>
+          </div>
         </div>
-    </section>
 
-    <!-- Course Content & Sidebar -->
-    <div class="container">
-        <div class="course-layout">
-
-            <!-- Main Content -->
-            <div class="course-main">
-                <!-- Tabs Navigation -->
-                <div class="course-tabs-nav">
-                    <button class="tab-btn active" data-target="overview">Descripción</button>
-                    <button class="tab-btn" data-target="curriculum">Plan de Estudios</button>
-                    <button class="tab-btn" data-target="instructor">Docente</button>
-                </div>
-
-                <!-- Overview Tab -->
-                <div id="overview" class="tab-pane active">
-                    <h3>Sobre este diplomado</h3>
-                    <p>La **Psicología Positiva** es el estudio científico de lo que hace que la vida valga la pena.
-                        Este diplomado ofrece una inmersión profunda en las teorías y prácticas que promueven el
-                        bienestar, la resiliencia y el florecimiento humano.</p>
-                    <br>
-                    <h4>Lo que aprenderás:</h4>
-                    <ul class="custom-list" style="margin: 15px 0 25px 20px;">
-                        <li>Fundamentos de la Psicología Positiva y su historia.</li>
-                        <li>Intervenciones prácticas para el bienestar personal y profesional.</li>
-                        <li>Aplicación en contextos educativos y clínicos.</li>
-                        <li>Neurobiología de las emociones positivas.</li>
-                    </ul>
-                    <p>Este programa está diseñado para psicólogos, educadores, y profesionales de la salud que deseen
-                        integrar herramientas basadas en evidencia para potenciar el desarrollo humano.</p>
-                </div>
-
-                <!-- Curriculum Tab -->
-                <div id="curriculum" class="tab-pane">
-                    <h3>Módulos de Aprendizaje</h3>
-                    <div class="curriculum-accordion">
-                        <!-- Item 1 -->
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Módulo 1: Introducción y Fundamentos</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="accordion-body">
-                                <p>Historia de la Psicología Positiva. Conceptos de Bienestar (PERMA). Diferencias con
-                                    la psicología tradicional.</p>
-                            </div>
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Módulo 2: Emociones Positivas</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="accordion-body">
-                                <p>El rol evolutivo de las emociones positivas. Estrategias para cultivar gratitud y
-                                    optimismo.</p>
-                            </div>
-                        </div>
-                        <!-- Item 3 -->
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Módulo 3: Fortalezas de Carácter</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="accordion-body">
-                                <p>Identificación y uso de fortalezas (VIA). Flow y engagement en el trabajo y la vida.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Instructor Tab -->
-                <div id="instructor" class="tab-pane">
-                    <div class="service-card" style="text-align: left; display: flex; align-items: center; gap: 20px;">
-                        <div
-                            style="width: 80px; height: 80px; background: #ddd; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-                            <i class="fas fa-user-circle" style="font-size: 3rem; color: #aaa;"></i>
-                        </div>
-                        <div>
-                            <h3>Dr. Joaquín [Apellido]</h3>
-                            <p style="color: var(--primary-color);">Director Académico</p>
-                            <p>Especialista en Psicología Positiva y Neurociencias Afectivas con más de 15 años de
-                                experiencia.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Sidebar -->
-            <div class="course-sidebar-wrapper">
-                <div class="course-sidebar-card">
-                    <div class="sidebar-image">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="course-price">Gratis</div>
-                    <a href="contact.html" class="btn-primary"
-                        style="width: 100%; display: block; margin-bottom: 20px;">Inscribirse Ahora</a>
-
-                    <ul class="course-features-list">
-                        <li><strong>Duración:</strong> <span>12 semanas</span></li>
-                        <li><strong>Clases:</strong> <span>24 sesiones</span></li>
-                        <li><strong>Certificado:</strong> <span>Sí</span></li>
-                        <li><strong>Idioma:</strong> <span>Español</span></li>
-                        <li><strong>Acceso:</strong> <span>De por vida</span></li>
-                    </ul>
-
-                    <div style="text-align: left;">
-                        <h4>Compartir curso:</h4>
-                        <div class="social-links" style="justify-content: flex-start; margin-top: 10px;">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base font-semibold text-primary border-b-2 border-primary pb-0.5 flex items-center gap-1 py-2">
+            Profesionales <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual</a>
+            <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
+            <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
+          </div>
         </div>
+      </nav>
+
+      <!-- Auth UI / CTA -->
+      <div id="auth-ui" class="hidden md:flex items-center gap-4">
+        <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
+          <i class="fas fa-calendar-check mr-2"></i> Reservar Consulta
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-primary p-2 mobile-menu-toggle" aria-label="Menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
     </div>
+  </header>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2024 CEDEMOP. Todos los derechos reservados.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
+  <main class="flex-grow pt-28">
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 py-12">
+      <div class="bg-surface-container-lowest rounded-3xl p-8 md:p-12 shadow-ethereal border border-surface-container-highest space-y-6">
+        <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full">Capacitación Especializada</span>
+        
+        <h1 class="font-display text-3xl md:text-4xl text-primary font-normal">
+          Programa de Formación en Intervención y Educación Emocional
+        </h1>
+        
+        <p class="font-body text-base text-on-surface-variant leading-relaxed">
+          Programa de formación continua estructurado en módulos teóricos y clínicos sobre modelos de regulación emocional, abordaje en consulta y pautas éticas.
+        </p>
+
+        <div class="pt-6 border-t border-surface-container-highest flex flex-col sm:flex-row gap-4">
+          <a href="contact.html" class="bg-primary text-on-primary px-8 py-3.5 rounded-full font-semibold text-sm text-center shadow-md hover:bg-primary/90 transition-all">
+            Consultar por Inscripción / Información
+          </a>
+          <a href="aula.html" class="bg-surface-container text-primary border border-surface-container-highest px-8 py-3.5 rounded-full font-semibold text-sm text-center hover:bg-surface-container-high transition-all">
+            Acceso al Aula Virtual
+          </a>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-16 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto opacity-90 mb-2">
+      <p class="text-xs text-on-surface-variant opacity-75">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
 
 </body>
-
 </html>

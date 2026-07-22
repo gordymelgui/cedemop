@@ -1,159 +1,232 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula Virtual - CEDEMOP</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="js/script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursos & Capacitación - CEDEMOP</title>
+
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "secondary": "#904c2f"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)",
+            "ethereal-hover": "0 30px 60px rgba(45, 79, 66, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-content {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+  </style>
+
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/auth-nav.js" defer></script>
 </head>
 
-<body>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
 
-    <header class="site-header glass-header">
-        <div class="container header-container">
-            <div class="logo">
-                <a href="index.html" class="flex items-center shrink-0 bg-primary px-4 py-2 rounded-2xl shadow-sm border border-primary-container hover:bg-primary/95 transition-all duration-300">
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center shrink-0 bg-primary px-4 py-2 rounded-2xl shadow-sm border border-primary-container hover:bg-primary/95 transition-all duration-300">
         <img src="logo.png" alt="CEDEMOP Logo" class="h-9 md:h-11 w-auto object-contain">
       </a>
-            </div>
-            <nav class="main-nav">
-                <button class="mobile-menu-toggle" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Nosotros <i class="fas fa-chevron-down text-xs"></i></a>
-                        <ul class="dropdown-content glass-dropdown">
-                            <li><a href="about.html">Quiénes Somos</a></li>
-                            <li><a href="staff.html">Nuestro Equipo</a></li>
-                            <li><a href="corporate.html">Alianzas Institucionales</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Pacientes <i class="fas fa-chevron-down text-xs"></i></a>
-                        <ul class="dropdown-content glass-dropdown">
-                            <li><a href="psychotherapy.html">Psicoterapia Online</a></li>
-                            <li><a href="resources_patients.html">Recursos Gratuitos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Profesionales <i
-                                class="fas fa-chevron-down text-xs"></i></a>
-                        <ul class="dropdown-content glass-dropdown">
-                            <li><a href="courses.html">Aula Virtual & Cursos</a></li>
-                            <li><a href="supervision.html">Supervisiones Clínicas</a></li>
-                            <li><a href="resources_pros.html">Biblioteca Digital</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html" class="nav-btn-highlight">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <section class="section-padding-lg text-center bg-light">
-        <div class="container">
-            <span class="badge-pill" style="background:var(--primary); color:white; border:none;">Formación
-                Profesional</span>
-            <h1 class="mb-4">Aula Virtual</h1>
-            <p style="max-width:600px; margin:0 auto;">Accede a nuestros programas académicos y especializaciones.</p>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-body text-base text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Cedemop <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-52 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Sobre Nosotros</a>
+            <a href="staff.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Staff Profesional</a>
+            <a href="corporate.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Instituciones</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Blog & Noticias</a>
+            <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Contacto</a>
+          </div>
         </div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Pacientes <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="psychotherapy.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Psicoterapia Online</a>
+            <a href="resources_patients.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Recursos & Libros</a>
+          </div>
+        </div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base font-semibold text-primary border-b-2 border-primary pb-0.5 flex items-center gap-1 py-2">
+            Profesionales <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual</a>
+            <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
+            <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Auth UI / CTA -->
+      <div id="auth-ui" class="hidden md:flex items-center gap-4">
+        <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
+          <i class="fas fa-calendar-check mr-2"></i> Reservar Consulta
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-primary p-2 mobile-menu-toggle" aria-label="Menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-28">
+    <!-- Hero Section (Stitch Design) -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pt-12 pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="inline-block bg-surface-container-high px-4 py-2 rounded-full">
+            <span class="text-primary font-semibold text-xs uppercase tracking-wider">Formación Continua & Capacitación</span>
+          </div>
+          <h1 class="font-display text-4xl md:text-5xl text-primary font-normal leading-tight">
+            Programa de Capacitación en Salud Mental
+          </h1>
+          <p class="font-body text-lg text-on-surface-variant leading-relaxed">
+            Descubrí programas de formación clínica y talleres prácticos diseñados para profesionales, psicólogos y estudiantes de la salud mental.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <a href="course-detail.html" class="bg-primary text-on-primary px-8 py-4 rounded-full font-semibold text-base shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5 transition-all text-center">
+              Ver Programa Completo
+            </a>
+            <a href="contact.html" class="text-on-surface-variant font-semibold text-base hover:text-primary transition-colors flex items-center justify-center gap-2">
+              Solicitar Información <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="relative h-[400px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-ethereal border-4 border-surface">
+          <img src="imagenes/wp-uploads/312207595_1964040763781774_318542561535812704_n.jpg" alt="Capacitación CEDEMOP" class="object-cover w-full h-full">
+        </div>
+      </div>
     </section>
 
-    <section class="section-padding">
-        <div class="container">
-            <!-- Loading Indicator -->
-            <div id="loading-indicator" style="text-align: center; color: var(--text-light);">
-                <i class="fas fa-spinner fa-spin fa-2x"></i>
-                <p>Cargando cursos...</p>
-            </div>
-
-            <!-- Dynamic Container -->
-            <div id="courses-grid" class="grid-3">
-                <!-- Javascript will inject cards here -->
-            </div>
-
-            <div id="empty-state" class="hidden text-center" style="grid-column: 1/-1; padding: 40px;">
-                <p>No hay cursos publicados por el momento.</p>
-            </div>
+    <!-- Catalog Cards Grid -->
+    <section class="bg-surface-container-low py-20 px-6 md:px-12">
+      <div class="max-w-[1240px] mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="font-headline text-3xl md:text-4xl text-primary mb-4">Catálogo de Formación CEDEMOP</h2>
+          <p class="font-body text-lg text-on-surface-variant">Cursos teóricos y metodológicos desarrollados por el equipo docente de CEDEMOP.</p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-ethereal border border-surface-container-highest flex flex-col justify-between hover:shadow-ethereal-hover transition-all">
+            <div>
+              <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full">Formación Clínica</span>
+              <h3 class="font-headline text-2xl text-primary mt-4 mb-3">Modelos de Intervención Psicoterapéutica</h3>
+              <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+                Capacitación sobre marcos teóricos, estrategias de intervención y abordaje ético en la práctica clínica profesional.
+              </p>
+            </div>
+            <a href="course-detail.html" class="inline-flex items-center font-semibold text-secondary hover:text-secondary-container transition-colors">
+              Ver programa de formación <span class="material-symbols-outlined ml-2 text-base">arrow_forward</span>
+            </a>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-ethereal border border-surface-container-highest flex flex-col justify-between hover:shadow-ethereal-hover transition-all">
+            <div>
+              <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full">Educación Emocional</span>
+              <h3 class="font-headline text-2xl text-primary mt-4 mb-3">Gestión y Regulación Emocional</h3>
+              <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+                Herramientas para el desarrollo de competencias socioemocionales en el ámbito educativo e institucional.
+              </p>
+            </div>
+            <a href="course-detail.html" class="inline-flex items-center font-semibold text-secondary hover:text-secondary-container transition-colors">
+              Ver programa de formación <span class="material-symbols-outlined ml-2 text-base">arrow_forward</span>
+            </a>
+          </div>
+
+          <div class="bg-surface-container-lowest rounded-3xl p-8 shadow-ethereal border border-surface-container-highest flex flex-col justify-between hover:shadow-ethereal-hover transition-all">
+            <div>
+              <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full">Prevención & Crisis</span>
+              <h3 class="font-headline text-2xl text-primary mt-4 mb-3">Evaluación de Riesgo y Protocolos de Crisis</h3>
+              <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
+                Formación sobre pautas de contención, detección de factores de riesgo y trabajo en red.
+              </p>
+            </div>
+            <a href="course-detail.html" class="inline-flex items-center font-semibold text-secondary hover:text-secondary-container transition-colors">
+              Ver programa de formación <span class="material-symbols-outlined ml-2 text-base">arrow_forward</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
     </section>
+  </main>
 
-    <footer class="site-footer-premium">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <h4>CEDEMOP</h4>
-                <p>&copy; 2026 CEDEMOP.</p>
-            </div>
-            <div class="footer-links">
-                <!-- empty for simplicity per design -->
-            </div>
-        </div>
-    </footer>
-
-    <!-- Logic to fetch Courses -->
-    <script type="module">
-        import { db } from './js/firebase-config.js';
-        import { collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        const grid = document.getElementById('courses-grid');
-        const loading = document.getElementById('loading-indicator');
-        const emptyState = document.getElementById('empty-state');
-
-        async function loadCourses() {
-            try {
-                const q = query(collection(db, "courses"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
-
-                loading.classList.add('hidden');
-
-                if (querySnapshot.empty) {
-                    emptyState.classList.remove('hidden');
-                    return;
-                }
-
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const card = document.createElement('div');
-                    card.className = 'glass-card';
-
-                    const imgUrl = data.imageUrl || 'https://via.placeholder.com/400x250?text=Curso+Cedemop';
-
-                    card.innerHTML = `
-                        <div style="height: 200px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
-                            <img src="${imgUrl}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <h3>${data.title}</h3>
-                        <p>${data.description}</p>
-                        ${data.docUrl ? `<a href="${data.docUrl}" target="_blank" class="btn-primary-glass" style="display:inline-block; font-size:0.9rem; padding: 10px 20px;">Ver Programa / Inscribirse</a>` : ''}
-                    `;
-                    grid.appendChild(card);
-                });
-
-            } catch (error) {
-                console.error("Error loading courses:", error);
-                loading.innerHTML = `<p style="color:red">Error cargando contenido. Verifica la configuración de Firebase.</p>`;
-            }
-        }
-
-        loadCourses();
-    </script>
-
-    <style>
-        .hidden {
-            display: none !important;
-        }
-    </style>
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-16 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto opacity-90 mb-2">
+      <p class="text-xs text-on-surface-variant opacity-75">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
 
 </body>
-
 </html>

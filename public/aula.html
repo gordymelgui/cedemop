@@ -1,217 +1,244 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula Virtual en Vivo - CEDEMOP</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="js/script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula Virtual - CEDEMOP</title>
 
-    <!-- Jitsi API -->
-    <script src="https://meet.jit.si/external_api.js"></script>
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        /* Estilos específicos para el aula */
-        .aula-container {
-            max-width: 1400px;
-            margin: 40px auto;
-            padding: 0 20px;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "primary-container": "#2d4f42",
+            "on-primary-container": "#9bc0af",
+            "secondary": "#904c2f",
+            "tertiary": "#373229"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)",
+            "ethereal-hover": "0 30px 60px rgba(45, 79, 66, 0.12)"
+          }
         }
+      }
+    };
+  </script>
 
-        .aula-header {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+  <style>
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-content {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+  </style>
 
-        .aula-header h1 {
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin: 0;
-        }
-
-        .aula-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-outline {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            cursor: pointer;
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* El contenedor donde se dibuja el video */
-        #meet-frame {
-            width: 100%;
-            height: 75vh;
-            /* Ocupará el 75% del alto de la pantalla */
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            background-color: #f8fafc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-text {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-color);
-            font-size: 1.2rem;
-        }
-    </style>
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/auth-nav.js" defer></script>
 </head>
 
-<body>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
 
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html" class="flex items-center shrink-0 bg-primary px-4 py-2 rounded-2xl shadow-sm border border-primary-container hover:bg-primary/95 transition-all duration-300">
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center shrink-0 bg-primary px-4 py-2 rounded-2xl shadow-sm border border-primary-container hover:bg-primary/95 transition-all duration-300">
         <img src="logo.png" alt="CEDEMOP Logo" class="h-9 md:h-11 w-auto object-contain">
       </a>
-            </div>
-            <nav class="main-nav">
-                <button class="mobile-menu-toggle" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Inicio</a></li>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Cedemop</a>
-                        <ul class="dropdown-content">
-                            <li><a href="about.html">Sobre Nosotros</a></li>
-                            <li><a href="staff.html">Staff</a></li>
-                            <li><a href="corporate.html">Instituciones</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contacto</a></li>
-                        </ul>
-                    </li>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-body text-base text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Pacientes y Familiares</a>
-                        <ul class="dropdown-content">
-                            <li><a href="psychotherapy.html">Psicoterapia</a></li>
-                            <li><a href="resources_patients.html">Recursos</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger active">Profesionales</a>
-                        <ul class="dropdown-content">
-                            <li><a href="courses.html" class="active">Aula Virtual</a></li>
-                            <li><a href="resources_pros.html">Recursos</a></li>
-                            <li><a href="supervision.html">Supervisiones</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Contenido Principal: El Aula -->
-    <main class="aula-container">
-        <div class="aula-header">
-            <div>
-                <h1><i class="fas fa-video"></i> Aula en Vivo: Taller Principal</h1>
-                <p style="color: #64748b; margin-top: 5px;">Iniciaste sesión como participante. Por favor, mantén tu
-                    micrófono silenciado.</p>
-            </div>
-            <div class="aula-actions">
-                <!-- Simulación de botón para salir o ver recursos adjuntos -->
-                <button class="btn-outline" onclick="alert('Aquí se desplegarán los PDFs de la clase')"><i
-                        class="fas fa-file-pdf"></i> Material de Clase</button>
-                <a href="courses.html" class="btn-outline" style="border-color: #ef4444; color: #ef4444;"><i
-                        class="fas fa-sign-out-alt"></i> Salir del Aula</a>
-            </div>
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Cedemop <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-52 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Sobre Nosotros</a>
+            <a href="staff.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Staff Profesional</a>
+            <a href="corporate.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Instituciones</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Blog & Noticias</a>
+            <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Contacto</a>
+          </div>
         </div>
 
-        <!-- El "Lienzo" de Jitsi -->
-        <div id="meet-frame">
-            <div class="loading-text"><i class="fas fa-spinner fa-spin"></i> Cargando videollamada de alta seguridad...
-            </div>
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Pacientes <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="psychotherapy.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Psicoterapia Online</a>
+            <a href="resources_patients.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Recursos & Libros</a>
+          </div>
         </div>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 CEDEMOP. Todos los derechos reservados.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base font-semibold text-primary border-b-2 border-primary pb-0.5 flex items-center gap-1 py-2">
+            Profesionales <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual</a>
+            <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
+            <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
+          </div>
         </div>
-    </footer>
+      </nav>
 
-    <!-- Script para inicializar Jitsi -->
-    <script>
-        window.onload = () => {
-            // Limpiamos el texto de "Cargando..."
-            document.getElementById('meet-frame').innerHTML = '';
+      <!-- Auth UI / CTA -->
+      <div id="auth-ui" class="hidden md:flex items-center gap-4">
+        <a href="admin.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
+          <i class="fas fa-user-circle mr-2"></i> Acceso Alumnos
+        </a>
+      </div>
 
-            // Configuramos la API de la sala virtual
-            const domain = 'meet.jit.si';
-            const options = {
-                roomName: 'CedemopAulaPrueba001', // El código secreto de la sala (esto lo haremos dinámico con Firebase luego)
-                width: '100%',
-                height: '100%',
-                parentNode: document.querySelector('#meet-frame'),
-                configOverwrite: {
-                    // Ocultar marcas de agua molestas y herramientas complejas
-                    DISABLE_VIDEO_BACKGROUND: false,
-                    prejoinPageEnabled: true // Pantalla previa para probar cámara antes de entrar
-                },
-                interfaceConfigOverwrite: {
-                    // Personalización de la interfaz (colores y botones)
-                    SHOW_JITSI_WATERMARK: false,
-                    SHOW_WATERMARK_FOR_GUESTS: false,
-                    DEFAULT_BACKGROUND: '#f8fafc',
-                    TOOLBAR_BUTTONS: [
-                        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-                        'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
-                        'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
-                        'videoquality', 'filmstrip', 'tileview', 'videobackgroundblur', 'download'
-                    ],
-                },
-            };
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-primary p-2 mobile-menu-toggle" aria-label="Menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </header>
 
-            // Lanzamos la videollamada incrustada
-            const api = new JitsiMeetExternalAPI(domain, options);
+  <main class="flex-grow pt-28">
+    <!-- Hero Section -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pt-12 pb-12 text-center">
+      <div class="max-w-3xl mx-auto space-y-4">
+        <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container-highest px-4 py-2 rounded-full">Plataforma Educativa CEDEMOP</span>
+        <h1 class="font-display text-4xl md:text-5xl text-primary font-normal leading-tight">
+          Aula Virtual & Clases en Vivo
+        </h1>
+        <p class="font-body text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+          Espacio de capacitación para profesionales y alumnos inscritos en los programas de formación clínica y educación emocional de CEDEMOP.
+        </p>
+      </div>
+    </section>
 
-            // Opcional: Para cambiar el nombre si quieres cuando haya usuarios
-            // api.executeCommand('displayName', 'Alumno Cedemop');
-        };
-    </script>
+    <!-- Classroom Canvas (Stitch Design) -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pb-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Main Video / Live Class Window -->
+        <div class="lg:col-span-8 space-y-6">
+          <div class="relative w-full aspect-video bg-primary-container rounded-3xl overflow-hidden shadow-ethereal border border-surface-container-highest flex items-center justify-center">
+            <img src="imagenes/wp-uploads/312207595_1964040763781774_318542561535812704_n.jpg" alt="Clase CEDEMOP" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-primary/40 backdrop-blur-xs flex flex-col items-center justify-center text-white p-6 text-center">
+              <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm cursor-pointer hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+              </div>
+              <h3 class="font-headline text-2xl font-normal mb-2">Módulo 1: Conceptos Introductorios en Educación Emocional</h3>
+              <p class="text-xs text-white/80 uppercase tracking-widest">Capacitación Clínica CEDEMOP</p>
+            </div>
+          </div>
+
+          <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-4">
+            <h2 class="font-headline text-2xl text-primary">Descripción del Módulo</h2>
+            <p class="font-body text-on-surface-variant text-base leading-relaxed">
+              En este módulo introductorio abordamos los modelos teóricos fundamentales de la regulación emocional, el rol del acompañamiento terapéutico y las estrategias clínicas aplicadas a la psicoterapia.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-4 border-t border-surface-container-highest">
+              <a href="#" class="inline-flex items-center text-sm font-semibold text-secondary hover:text-secondary-container transition-colors">
+                <i class="fas fa-file-pdf mr-2"></i> Descargar Guía del Módulo (PDF)
+              </a>
+              <a href="#" class="inline-flex items-center text-sm font-semibold text-primary hover:text-secondary transition-colors">
+                <i class="fas fa-question-circle mr-2"></i> Realizar Consulta al Tutor
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Curriculum / Modules List -->
+        <div class="lg:col-span-4 bg-surface-container rounded-3xl p-6 border border-surface-container-highest shadow-ethereal flex flex-col">
+          <h3 class="font-headline text-xl text-primary mb-4 pb-3 border-b border-surface-container-highest">Programa de Clases</h3>
+          
+          <div class="space-y-3 flex-grow overflow-y-auto max-h-[500px] pr-1">
+            
+            <div class="p-4 bg-surface-container-lowest rounded-2xl border border-primary/30 flex items-start gap-3">
+              <span class="material-symbols-outlined text-secondary text-xl mt-0.5">play_circle</span>
+              <div>
+                <h4 class="font-semibold text-primary text-sm">Clase 1: Conceptos Introductorios</h4>
+                <p class="text-xs text-on-surface-variant mt-1">Regulación emocional y modelos clínicos</p>
+                <span class="inline-block text-[10px] font-semibold uppercase text-secondary bg-surface-container px-2 py-0.5 rounded-full mt-2">En reproducción</span>
+              </div>
+            </div>
+
+            <div class="p-4 bg-surface-container-lowest/70 rounded-2xl border border-surface-container-highest flex items-start gap-3 opacity-90">
+              <span class="material-symbols-outlined text-on-surface-variant text-xl mt-0.5">lock</span>
+              <div>
+                <h4 class="font-semibold text-on-surface text-sm">Clase 2: Gestión Emocional en Psicoterapia</h4>
+                <p class="text-xs text-on-surface-variant mt-1">Herramientas prácticas para la consulta</p>
+                <span class="inline-block text-[10px] font-medium uppercase text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full mt-2">Próximo Módulo</span>
+              </div>
+            </div>
+
+            <div class="p-4 bg-surface-container-lowest/70 rounded-2xl border border-surface-container-highest flex items-start gap-3 opacity-90">
+              <span class="material-symbols-outlined text-on-surface-variant text-xl mt-0.5">lock</span>
+              <div>
+                <h4 class="font-semibold text-on-surface text-sm">Clase 3: Evaluación y Factores de Protección</h4>
+                <p class="text-xs text-on-surface-variant mt-1">Intervención preventiva y seguimiento</p>
+                <span class="inline-block text-[10px] font-medium uppercase text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full mt-2">Próximo Módulo</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-surface-container-highest text-center">
+            <a href="admin.html" class="w-full inline-flex items-center justify-center bg-primary text-on-primary py-3 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-all">
+              <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión con Tu Cuenta
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-16 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto opacity-90 mb-2">
+      <p class="text-xs text-on-surface-variant opacity-75">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
 </body>
-
 </html>
