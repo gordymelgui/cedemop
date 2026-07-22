@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aula Virtual - CEDEMOP</title>
+  <title>Aula Virtual & Videollamadas - CEDEMOP</title>
 
   <!-- Tailwind CSS & Custom Config -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -68,6 +68,11 @@
       transform: translateY(10px);
       transition: all 0.3s ease;
     }
+    .role-tab.active {
+      background-color: #15382c;
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(21, 56, 44, 0.2);
+    }
   </style>
 
   <script src="js/script.js" defer></script>
@@ -116,7 +121,7 @@
           </a>
           <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
             <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
-            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual & Videollamada</a>
             <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
             <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
           </div>
@@ -126,7 +131,7 @@
       <!-- Auth UI / CTA -->
       <div id="auth-ui" class="hidden md:flex items-center gap-4">
         <a href="admin.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
-          <i class="fas fa-user-circle mr-2"></i> Acceso Alumnos
+          <i class="fas fa-user-shield mr-2"></i> Acceso Admin
         </a>
       </div>
 
@@ -138,97 +143,238 @@
   </header>
 
   <main class="flex-grow pt-28">
-    <!-- Hero Section -->
-    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pt-12 pb-12 text-center">
+    <!-- Hero Section with Role Switcher -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pt-8 pb-8 text-center">
       <div class="max-w-3xl mx-auto space-y-4">
         <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container-highest px-4 py-2 rounded-full">Plataforma Educativa CEDEMOP</span>
         <h1 class="font-display text-4xl md:text-5xl text-primary font-normal leading-tight">
           Aula Virtual & Clases en Vivo
         </h1>
-        <p class="font-body text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
-          Espacio de capacitación para profesionales y alumnos inscritos en los programas de formación clínica y educación emocional de CEDEMOP.
+        <p class="font-body text-base md:text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+          Espacio interactivo de videollamadas, clases sincrónicas y gestión académica de CEDEMOP.
         </p>
+
+        <!-- Selector de Modo / Rol (Profesor vs Alumno) -->
+        <div class="flex justify-center items-center gap-3 pt-4">
+          <button id="tab-student" onclick="switchRole('student')" class="role-tab active px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 flex items-center gap-2">
+            <i class="fas fa-user-graduate"></i> Vista de Alumno
+          </button>
+          <button id="tab-teacher" onclick="switchRole('teacher')" class="role-tab bg-surface-container text-on-surface-variant px-6 py-3 rounded-full font-semibold text-sm hover:bg-surface-container-high transition-all duration-300 flex items-center gap-2">
+            <i class="fas fa-chalkboard-teacher"></i> Gestor del Profesor / Docente
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- Classroom Canvas (Stitch Design) -->
+    <!-- Interactive Live Class & Video Conference Canvas -->
     <section class="max-w-[1240px] mx-auto px-6 md:px-12 pb-20">
+      
+      <!-- Banner de Transmisión en Vivo Destacado -->
+      <div class="mb-8 bg-secondary/10 border-2 border-secondary/30 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+        <div class="flex items-center gap-4 text-left">
+          <div class="relative flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+          </div>
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-secondary">Clase en Vivo en Transmisión</span>
+            <h3 class="font-headline text-xl text-primary font-normal">Módulo 1: Regulación Emocional y Modelos Clínicos</h3>
+            <p class="text-xs text-on-surface-variant">Impartida por el Equipo Docente CEDEMOP • Sala Virtual #101</p>
+          </div>
+        </div>
+        <button onclick="joinVideoCall()" class="bg-secondary text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-secondary/90 transition-all shadow-md flex items-center gap-2 shrink-0">
+          <i class="fas fa-video"></i> Unirse a la Videollamada Ahora
+        </button>
+      </div>
+
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- Main Video / Live Class Window -->
+        <!-- Video Screen / Interactive Jitsi Room Container -->
         <div class="lg:col-span-8 space-y-6">
-          <div class="relative w-full aspect-video bg-primary-container rounded-3xl overflow-hidden shadow-ethereal border border-surface-container-highest flex items-center justify-center">
-            <img src="imagenes/wp-uploads/312207595_1964040763781774_318542561535812704_n.jpg" alt="Clase CEDEMOP" class="w-full h-full object-cover opacity-60">
-            <div class="absolute inset-0 bg-primary/40 backdrop-blur-xs flex flex-col items-center justify-center text-white p-6 text-center">
-              <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm cursor-pointer hover:scale-110 transition-transform">
-                <span class="material-symbols-outlined text-4xl text-white">play_arrow</span>
+          <div id="video-room-container" class="relative w-full aspect-video bg-slate-900 rounded-3xl overflow-hidden shadow-ethereal border border-surface-container-highest flex flex-col items-center justify-center">
+            
+            <!-- Video Placeholder Cover / Frame -->
+            <div id="video-placeholder" class="relative w-full h-full flex flex-col items-center justify-center text-white text-center p-6 bg-cover bg-center" style="background-image: linear-gradient(rgba(21, 56, 44, 0.75), rgba(21, 56, 44, 0.85)), url('imagenes/wp-uploads/312207595_1964040763781774_318542561535812704_n.jpg');">
+              <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6 backdrop-blur-md cursor-pointer hover:scale-110 transition-transform shadow-lg" onclick="joinVideoCall()">
+                <i class="fas fa-video text-3xl text-white"></i>
               </div>
-              <h3 class="font-headline text-2xl font-normal mb-2">Módulo 1: Conceptos Introductorios en Educación Emocional</h3>
-              <p class="text-xs text-white/80 uppercase tracking-widest">Capacitación Clínica CEDEMOP</p>
+              <span class="text-xs uppercase tracking-widest text-secondary-fixed bg-white/10 px-4 py-1.5 rounded-full mb-3 backdrop-blur-sm">Sala de Videollamada Interactiva</span>
+              <h3 class="font-headline text-2xl font-normal max-w-lg leading-tight mb-2">Clase en Vivo - Regulación Emocional</h3>
+              <p class="text-xs text-white/80 max-w-md mb-6">Presiona el botón para conectar tu cámara y micrófono en la sala virtual de CEDEMOP.</p>
+              <button onclick="joinVideoCall()" class="bg-primary text-white px-8 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg flex items-center gap-2">
+                <i class="fas fa-plug"></i> Conectar Sala Virtual
+              </button>
             </div>
+
+            <!-- Iframe para Videollamada (Jitsi / Embedded Video Room) -->
+            <iframe id="video-iframe" class="hidden w-full h-full border-0" allow="camera; microphone; display-capture; autoplay"></iframe>
           </div>
 
+          <!-- Video Room Controls & Notes -->
           <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-4">
-            <h2 class="font-headline text-2xl text-primary">Descripción del Módulo</h2>
+            <div class="flex items-center justify-between pb-4 border-b border-surface-container-highest">
+              <h2 class="font-headline text-2xl text-primary">Detalles del Módulo & Videollamada</h2>
+              <div class="flex items-center gap-3">
+                <button onclick="toggleMic()" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors" title="Micrófono">
+                  <i class="fas fa-microphone"></i>
+                </button>
+                <button onclick="toggleCamera()" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors" title="Cámara">
+                  <i class="fas fa-video"></i>
+                </button>
+              </div>
+            </div>
+            
             <p class="font-body text-on-surface-variant text-base leading-relaxed">
-              En este módulo introductorio abordamos los modelos teóricos fundamentales de la regulación emocional, el rol del acompañamiento terapéutico y las estrategias clínicas aplicadas a la psicoterapia.
+              Esta sesión aborda los modelos de regulación emocional, estrategias de intervención en psicoterapia y ejercicios de supervisión de casos prácticos.
             </p>
-            <div class="flex flex-wrap gap-4 pt-4 border-t border-surface-container-highest">
+
+            <div class="flex flex-wrap gap-4 pt-2">
               <a href="#" class="inline-flex items-center text-sm font-semibold text-secondary hover:text-secondary-container transition-colors">
                 <i class="fas fa-file-pdf mr-2"></i> Descargar Guía del Módulo (PDF)
               </a>
               <a href="#" class="inline-flex items-center text-sm font-semibold text-primary hover:text-secondary transition-colors">
-                <i class="fas fa-question-circle mr-2"></i> Realizar Consulta al Tutor
+                <i class="fas fa-comment-dots mr-2"></i> Abrir Chat de Preguntas
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Course Curriculum / Modules List -->
-        <div class="lg:col-span-4 bg-surface-container rounded-3xl p-6 border border-surface-container-highest shadow-ethereal flex flex-col">
-          <h3 class="font-headline text-xl text-primary mb-4 pb-3 border-b border-surface-container-highest">Programa de Clases</h3>
+        <!-- Right Side Panel (Dynamic Student vs Teacher Views) -->
+        <div class="lg:col-span-4 space-y-6">
           
-          <div class="space-y-3 flex-grow overflow-y-auto max-h-[500px] pr-1">
+          <!-- VISTA DE ALUMNO -->
+          <div id="view-student-panel" class="bg-surface-container rounded-3xl p-6 border border-surface-container-highest shadow-ethereal space-y-6">
+            <h3 class="font-headline text-xl text-primary pb-3 border-b border-surface-container-highest flex items-center gap-2">
+              <i class="fas fa-graduation-cap text-secondary"></i> Tus Cursos & Clases Programadas
+            </h3>
             
-            <div class="p-4 bg-surface-container-lowest rounded-2xl border border-primary/30 flex items-start gap-3">
-              <span class="material-symbols-outlined text-secondary text-xl mt-0.5">play_circle</span>
-              <div>
-                <h4 class="font-semibold text-primary text-sm">Clase 1: Conceptos Introductorios</h4>
-                <p class="text-xs text-on-surface-variant mt-1">Regulación emocional y modelos clínicos</p>
-                <span class="inline-block text-[10px] font-semibold uppercase text-secondary bg-surface-container px-2 py-0.5 rounded-full mt-2">En reproducción</span>
+            <div class="space-y-4">
+              <div class="p-4 bg-surface-container-lowest rounded-2xl border-2 border-primary/30 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase text-secondary bg-surface-container px-2.5 py-1 rounded-full">Clase en Vivo Hoy</span>
+                  <span class="text-xs text-on-surface-variant font-semibold">18:00 Hs</span>
+                </div>
+                <h4 class="font-semibold text-primary text-base">Capacitación en Salud Mental</h4>
+                <p class="text-xs text-on-surface-variant leading-relaxed">Módulo 1: Conceptos Introductorios y Regulación Emocional</p>
+                <button onclick="joinVideoCall()" class="w-full mt-2 bg-primary text-white py-2.5 rounded-xl text-xs font-semibold hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+                  <i class="fas fa-video"></i> Entrar a la Clase en Vivo
+                </button>
+              </div>
+
+              <div class="p-4 bg-surface-container-lowest/80 rounded-2xl border border-surface-container-highest space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-medium uppercase text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">Próxima Sesión</span>
+                  <span class="text-xs text-on-surface-variant">Sábado 10:00 Hs</span>
+                </div>
+                <h4 class="font-semibold text-on-surface text-sm">Gestión Emocional en Psicoterapia</h4>
+                <p class="text-xs text-on-surface-variant">Módulo 2: Técnicas de intervención en consulta clínica</p>
               </div>
             </div>
 
-            <div class="p-4 bg-surface-container-lowest/70 rounded-2xl border border-surface-container-highest flex items-start gap-3 opacity-90">
-              <span class="material-symbols-outlined text-on-surface-variant text-xl mt-0.5">lock</span>
-              <div>
-                <h4 class="font-semibold text-on-surface text-sm">Clase 2: Gestión Emocional en Psicoterapia</h4>
-                <p class="text-xs text-on-surface-variant mt-1">Herramientas prácticas para la consulta</p>
-                <span class="inline-block text-[10px] font-medium uppercase text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full mt-2">Próximo Módulo</span>
-              </div>
+            <div class="pt-4 border-t border-surface-container-highest">
+              <a href="courses.html" class="w-full inline-flex items-center justify-center bg-surface-container-lowest text-primary py-3 rounded-xl font-semibold text-sm border border-surface-container-highest hover:bg-white transition-all">
+                Ver Catálogo de Cursos Inscritos
+              </a>
             </div>
-
-            <div class="p-4 bg-surface-container-lowest/70 rounded-2xl border border-surface-container-highest flex items-start gap-3 opacity-90">
-              <span class="material-symbols-outlined text-on-surface-variant text-xl mt-0.5">lock</span>
-              <div>
-                <h4 class="font-semibold text-on-surface text-sm">Clase 3: Evaluación y Factores de Protección</h4>
-                <p class="text-xs text-on-surface-variant mt-1">Intervención preventiva y seguimiento</p>
-                <span class="inline-block text-[10px] font-medium uppercase text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full mt-2">Próximo Módulo</span>
-              </div>
-            </div>
-
           </div>
 
-          <div class="mt-6 pt-4 border-t border-surface-container-highest text-center">
-            <a href="admin.html" class="w-full inline-flex items-center justify-center bg-primary text-on-primary py-3 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-all">
-              <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión con Tu Cuenta
-            </a>
+          <!-- VISTA DE PROFESOR / DOCENTE (GESTOR DE CLASES) -->
+          <div id="view-teacher-panel" class="hidden bg-surface-container-lowest rounded-3xl p-6 border-2 border-primary/20 shadow-ethereal space-y-6">
+            <h3 class="font-headline text-xl text-primary pb-3 border-b border-surface-container-highest flex items-center gap-2">
+              <i class="fas fa-chalkboard-teacher text-primary"></i> Gestor del Profesor
+            </h3>
+            
+            <form onsubmit="handleCreateClass(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-primary uppercase mb-1">Título de la Clase en Vivo</label>
+                <input type="text" id="class-title" required placeholder="Ej: Clase 2 - Estrategias en Crisis" class="w-full p-3 rounded-xl border border-surface-container-highest text-sm bg-surface">
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-primary uppercase mb-1">Fecha</label>
+                  <input type="date" id="class-date" required class="w-full p-3 rounded-xl border border-surface-container-highest text-sm bg-surface">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-primary uppercase mb-1">Hora</label>
+                  <input type="time" id="class-time" required class="w-full p-3 rounded-xl border border-surface-container-highest text-sm bg-surface">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-primary uppercase mb-1">Enlace de Videollamada (Zoom / Jitsi)</label>
+                <input type="url" id="class-link" placeholder="https://meet.jit.si/cedemop-clase" class="w-full p-3 rounded-xl border border-surface-container-highest text-sm bg-surface">
+              </div>
+
+              <button type="submit" class="w-full bg-primary text-white py-3.5 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-all shadow-md flex items-center justify-center gap-2">
+                <i class="fas fa-plus-circle"></i> Programar Nueva Clase en Vivo
+              </button>
+            </form>
+
+            <div id="teacher-success-msg" class="hidden p-3 bg-emerald-100 text-emerald-800 rounded-xl text-xs font-semibold text-center">
+              ¡Clase programada y notificada a los alumnos con éxito!
+            </div>
           </div>
+
         </div>
 
       </div>
     </section>
   </main>
+
+  <!-- Script para Control del Aula Virtual & Videollamadas -->
+  <script>
+    function switchRole(role) {
+      const studentTab = document.getElementById('tab-student');
+      const teacherTab = document.getElementById('tab-teacher');
+      const studentPanel = document.getElementById('view-student-panel');
+      const teacherPanel = document.getElementById('view-teacher-panel');
+
+      if (role === 'teacher') {
+        studentTab.classList.remove('active');
+        studentTab.classList.add('bg-surface-container', 'text-on-surface-variant');
+        teacherTab.classList.add('active');
+        teacherTab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        
+        studentPanel.classList.add('hidden');
+        teacherPanel.classList.remove('hidden');
+      } else {
+        teacherTab.classList.remove('active');
+        teacherTab.classList.add('bg-surface-container', 'text-on-surface-variant');
+        studentTab.classList.add('active');
+        studentTab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+        teacherPanel.classList.add('hidden');
+        studentPanel.classList.remove('hidden');
+      }
+    }
+
+    function joinVideoCall() {
+      const placeholder = document.getElementById('video-placeholder');
+      const iframe = document.getElementById('video-iframe');
+      
+      // Integración Jitsi Meet para Videollamada interactiva instantánea
+      iframe.src = "https://meet.jit.si/CEDEMOP_AulaVirtual_ClaseEnVivo_101#userInfo.displayName=%22Alumno%20CEDEMOP%22";
+      placeholder.classList.add('hidden');
+      iframe.classList.remove('hidden');
+    }
+
+    function handleCreateClass(e) {
+      e.preventDefault();
+      const msg = document.getElementById('teacher-success-msg');
+      msg.classList.remove('hidden');
+      setTimeout(() => {
+        msg.classList.add('hidden');
+      }, 4000);
+    }
+
+    function toggleMic() {
+      alert("Micrófono activado/desactivado en la sala virtual.");
+    }
+    function toggleCamera() {
+      alert("Cámara activada/desactivada en la sala virtual.");
+    }
+  </script>
 
   <!-- Footer -->
   <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">

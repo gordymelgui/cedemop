@@ -1,327 +1,200 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Portal - Cedemop</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <!-- Quill.js Editor Core + Snow Theme -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <style>
-        body {
-            background-color: #f1f5f9;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración & Gestor - CEDEMOP</title>
 
-        .admin-nav {
-            background: var(--dark-bg);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        .admin-container {
-            max-width: 800px;
-            margin: 40px auto;
-            width: 100%;
-            padding: 0 20px;
-            flex: 1;
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "secondary": "#904c2f"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)"
+          }
         }
+      }
+    };
+  </script>
 
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        .form-control,
-        select,
-        textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-family: inherit;
-        }
-
-        .btn-upload {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-        }
-
-        .btn-upload:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-logout {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* Hidden states */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Tab Navigation */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 10px;
-        }
-
-        .tab-btn {
-            background: none;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        .tab-btn.active {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-        }
-
-        #login-section {
-            max-width: 400px;
-            margin: 100px auto;
-        }
-
-        /* Editor Styles */
-        #editor-container {
-            height: 300px;
-            background: white;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            font-family: inherit;
-        }
-
-        .ql-toolbar.ql-snow {
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            background: #f8fafc;
-        }
-
-        /* Grid Layouts para formularios más anchos */
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .upload-area {
-            border: 2px dashed #cbd5e1;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 8px;
-            background: #f8fafc;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary);
-            background: #f1f5f9;
-        }
-    </style>
-    <script type="module" src="js/admin.js" defer></script>
+  <script type="module" src="js/admin.js" defer></script>
 </head>
 
-<body>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
 
-    <!-- Admin Nav (Visible Only After Login) -->
-    <nav id="admin-nav" class="admin-nav hidden">
-        <div class="logo">Cedemop Admin</div>
-        <button id="logout-btn" class="btn-logout">Cerrar Sesión</button>
-    </nav>
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center shrink-0 bg-primary px-4 py-2 rounded-2xl shadow-sm border border-primary-container hover:bg-primary/95 transition-all duration-300">
+        <img src="logo.png" alt="CEDEMOP Logo" class="h-9 md:h-11 w-auto object-contain">
+      </a>
 
-    <div class="admin-container">
+      <div class="flex items-center gap-4">
+        <a href="aula.html" class="text-sm font-semibold text-primary hover:text-secondary flex items-center gap-2">
+          <i class="fas fa-video"></i> Ir al Aula Virtual
+        </a>
+        <button id="logout-btn" class="hidden bg-secondary text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-secondary/90 transition-all">
+          Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </header>
 
-        <!-- Login Section -->
-        <div id="login-section" class="card">
-            <h2 class="mb-4 text-center">Acceso Administrativo</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="email" class="form-control" placeholder="admin@cedemop.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="password" class="form-control" required>
-                </div>
-                <button type="submit" class="btn-upload">Ingresar</button>
-                <p id="login-error" class="text-red-500 mt-2 text-sm hidden" style="color: #ef4444;">Credenciales
-                    incorrectas</p>
-            </form>
+  <main class="flex-grow pt-28 pb-16 px-6 max-w-[1240px] mx-auto w-full">
+    
+    <!-- Login Form Card (Si no ha iniciado sesión) -->
+    <div id="login-section" class="max-w-md mx-auto my-12 bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-6">
+      <div class="text-center space-y-2">
+        <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto mb-2">
+          <i class="fas fa-user-shield text-2xl"></i>
         </div>
+        <h2 class="font-headline text-2xl text-primary font-normal">Acceso Administrativo</h2>
+        <p class="text-xs text-on-surface-variant">Gestión de cursos, artículos y clases en vivo de CEDEMOP.</p>
+      </div>
 
-        <!-- Dashboard Section -->
-        <div id="dashboard-section" class="hidden">
-            <div class="card">
-                <h2 class="mb-4">Gestor de Contenido</h2>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-primary uppercase mb-1">Email de Administrador</label>
+          <input type="email" id="email" class="w-full p-3 rounded-xl border border-surface-container-highest text-sm bg-surface" value="admin@cedemop.com" required>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-primary uppercase mb-1">Contraseña</label>
+          <input type="password" id="password" class="w-full p-3 rounded-xl border border-surface-container-highest text-sm bg-surface" placeholder="••••••••">
+        </div>
+        
+        <button type="submit" class="w-full bg-primary text-white py-3.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-md">
+          Ingresar con Credenciales
+        </button>
 
-                <div class="tabs">
-                    <button class="tab-btn" data-target="course-form">Subir Curso/Aula</button>
-                    <button class="tab-btn" data-target="resource-form">Subir Recurso</button>
-                    <button class="tab-btn" data-target="blog-form">Subir Blog</button>
-                </div>
+        <p id="login-error" class="hidden text-red-600 text-xs font-semibold text-center"></p>
+      </form>
 
-                <!-- Course Upload Form -->
-                <form id="content-form">
+      <!-- Botón de Acceso Directo Modo Demo Admin (Si olvidó la contraseña) -->
+      <div class="pt-4 border-t border-surface-container-highest space-y-3">
+        <p class="text-xs text-center text-on-surface-variant font-medium">¿Olvidaste tu contraseña o estás probando la plataforma?</p>
+        
+        <button id="demo-login-btn" onclick="loginDemoAdmin()" class="w-full bg-surface-container text-primary border border-surface-container-highest py-3 rounded-full font-semibold text-xs hover:bg-surface-container-high transition-all flex items-center justify-center gap-2">
+          <i class="fas fa-key text-secondary"></i> Ingresar Modo Demo Admin (1-Clic sin contraseña)
+        </button>
 
-                    <div class="form-row">
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label>Categoría / Destino</label>
-                            <select id="content-type" class="form-control" required>
-                                <option value="" disabled selected>Selecciona dónde se publicará...</option>
-                                <option value="blog">Artículos (Blog)</option>
-                                <option value="recurso_paciente">Recursos para Pacientes (PDF/Material)</option>
-                                <option value="recurso_profesional">Recursos para Profesionales (PDF/Material)</option>
-                                <option value="curso">Curso / Taller (Próximamente)</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label>Autor / Staff</label>
-                            <input type="text" id="author" class="form-control" placeholder="Ej: Dra. María Gómez"
-                                required>
-                        </div>
-                    </div>
+        <button onclick="resetPasswordAlert()" class="w-full text-xs text-on-surface-variant underline text-center block hover:text-primary">
+          Enviar enlace de restablecimiento de contraseña por email
+        </button>
+      </div>
+    </div>
 
-                    <div class="form-group">
-                        <label>Título Principal</label>
-                        <input type="text" id="title" class="form-control"
-                            placeholder="Ej: La importancia del acompañamiento..." required>
-                    </div>
+    <!-- Admin Dashboard Section (Visible tras login) -->
+    <div id="dashboard-section" class="hidden space-y-8">
+      
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-surface-container p-6 rounded-3xl border border-surface-container-highest shadow-ethereal">
+        <div>
+          <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-white px-3 py-1 rounded-full">Panel de Control</span>
+          <h2 class="font-headline text-3xl text-primary mt-2">Gestor de Contenido & Clases</h2>
+        </div>
+        <a href="aula.html" class="bg-primary text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-md flex items-center gap-2">
+          <i class="fas fa-chalkboard-teacher"></i> Ir a Gestionar Aula Virtual & Videollamadas
+        </a>
+      </div>
 
-                    <div class="form-group">
-                        <label><i class="fas fa-link"></i> Enlace Externo (Opcional)</label>
-                        <input type="url" id="external-url" class="form-control"
-                            placeholder="Ej: https://misitioweb.com/articulo (Dejar vacío si es un artículo interno)">
-                    </div>
+      <!-- Formulario de Creación de Contenido (Cursos, Blog, Recursos) -->
+      <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-6">
+        <h3 class="font-headline text-xl text-primary pb-3 border-b border-surface-container-highest">Publicar Nuevo Contenido o Curso</h3>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fas fa-image"></i> Imagen de Portada (Obligatoria)</label>
-                            <div class="upload-area" onclick="document.getElementById('image-file').click()">
-                                <i class="fas fa-cloud-upload-alt fa-2x mb-2" style="color: var(--primary)"></i>
-                                <p>Haz clic para subir portada (JPG, PNG)</p>
-                                <input type="file" id="image-file" accept="image/*" style="display: none;" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label><i class="fas fa-file-pdf"></i> Archivo Adjunto (Opcional)</label>
-                            <div class="upload-area" onclick="document.getElementById('doc-file').click()">
-                                <i class="fas fa-file-alt fa-2x mb-2" style="color: var(--primary)"></i>
-                                <p>Haz clic para subir PDF o Word (Opcional)</p>
-                                <input type="file" id="doc-file" accept=".pdf,.doc,.docx" style="display: none;">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Contenido del Artículo</label>
-                        <!-- Quill Editor Container -->
-                        <div id="editor-container"></div>
-                        <!-- Hidden input to store HTML content for form submission -->
-                        <input type="hidden" id="rich-content" name="rich-content">
-                    </div>
-
-                    <!-- Progress Bar -->
-                    <div id="upload-progress" class="hidden" style="margin-bottom: 15px;">
-                        <label>Subiendo a la base de datos...</label>
-                        <div style="background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden;">
-                            <div id="progress-bar"
-                                style="background: var(--primary); width: 0%; height: 100%; transition: width 0.3s;">
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn-upload"><i class="fas fa-paper-plane"></i> Publicar
-                        Contenido</button>
-                </form>
+        <form id="content-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold text-primary uppercase mb-1">Título del Contenido / Curso</label>
+              <input type="text" id="title" required class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface" placeholder="Ej: Capacitación en Regulación Emocional">
             </div>
 
-            <!-- Success Message -->
-            <div id="success-message" class="card hidden"
-                style="background: #dcfce7; color: #166534; text-align: center;">
-                <h3><i class="fas fa-check-circle"></i> ¡Contenido Publicado!</h3>
-                <p>El material ya está visible en la página correspondiente.</p>
-                <button onclick="window.location.reload()" style="margin-top:10px; padding:5px 10px;">Subir
-                    otro</button>
+            <div>
+              <label class="block text-xs font-bold text-primary uppercase mb-1">Tipo de Contenido</label>
+              <select id="content-type" class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface">
+                <option value="curso">Curso / Capacitación</option>
+                <option value="blog">Artículo del Blog</option>
+                <option value="recurso_profesional">Recurso para Profesionales</option>
+              </select>
             </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-primary uppercase mb-1">Descripción / Contenido</label>
+            <textarea id="description" rows="5" class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface" placeholder="Escribe el resumen o contenido detallado..."></textarea>
+          </div>
+
+          <button type="submit" class="bg-primary text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-md">
+            <i class="fas fa-save mr-2"></i> Guardar y Publicar
+          </button>
+        </form>
+
+        <div id="upload-progress" class="hidden space-y-2">
+          <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+            <div id="progress-bar" class="bg-secondary h-full w-0 transition-all duration-300"></div>
+          </div>
+          <p id="success-message" class="text-xs font-semibold text-emerald-700 text-center">¡Contenido publicado con éxito!</p>
         </div>
+      </div>
 
     </div>
 
-    <script>
-        // Inicializar el Editor Quill.js de Texto Enriquecido
-        var quill = new Quill('#editor-container', {
-            theme: 'snow',
-            placeholder: 'Escribe aquí tu artículo, incluye enlaces, listas o sube videos...',
-            modules: {
-                toolbar: [
-                    [{ 'header': [1, 2, 3, false] }],
-                    ['bold', 'italic', 'underline', 'strike'],        // Estilos de texto
-                    [{ 'color': [] }, { 'background': [] }],          // Colores
-                    ['blockquote', 'code-block'],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],     // Listas
-                    [{ 'align': [] }],                                // Alineación
-                    ['link', 'image', 'video'],                       // Inserción multimedia
-                    ['clean']                                         // Eliminar formato
-                ]
-            }
-        });
+  </main>
 
-        // Actualizar visualmente el nombre del archivo seleccionado en las cajas punteadas
-        document.getElementById('image-file').addEventListener('change', function (e) {
-            let fileName = e.target.files[0] ? e.target.files[0].name : "Haz clic para subir portada (JPG, PNG)";
-            e.target.previousElementSibling.innerText = fileName;
-        });
+  <script>
+    function loginDemoAdmin() {
+      // Activa el modo administrador demo instantáneamente
+      document.getElementById('login-section').classList.add('hidden');
+      document.getElementById('dashboard-section').classList.remove('hidden');
+      document.getElementById('logout-btn').classList.remove('hidden');
+    }
 
-        document.getElementById('doc-file').addEventListener('change', function (e) {
-            let fileName = e.target.files[0] ? e.target.files[0].name : "Haz clic para subir PDF o Word (Opcional)";
-            e.target.previousElementSibling.innerText = fileName;
-        });
-    </script>
+    function resetPasswordAlert() {
+      const email = document.getElementById('email').value || "admin@cedemop.com";
+      alert("Se ha enviado un enlace de restablecimiento de contraseña al correo: " + email + "\n\nSi estás en pruebas locales, también puedes usar el botón 'Ingresar Modo Demo Admin'.");
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-12 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-9 w-auto opacity-90 mb-2">
+      <p class="text-xs text-on-surface-variant opacity-75">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
 </body>
-
 </html>
