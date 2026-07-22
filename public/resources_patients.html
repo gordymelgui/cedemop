@@ -1,209 +1,209 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos - CEDEMOP</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="js/script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursos para Pacientes - CEDEMOP</title>
+
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "secondary": "#904c2f"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)",
+            "ethereal-hover": "0 30px 60px rgba(45, 79, 66, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-content {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+  </style>
+
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/auth-nav.js" defer></script>
 </head>
 
-<body>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
 
-    <header class="site-header glass-header">
-        <div class="container header-container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="logo.png"
-                        alt="CEDEMOP">
-                </a>
-            </div>
-            <nav class="main-nav">
-                <button class="mobile-menu-toggle" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Nosotros <i class="fas fa-chevron-down text-xs"></i></a>
-                        <ul class="dropdown-content glass-dropdown">
-                            <li><a href="about.html">Quiénes Somos</a></li>
-                            <li><a href="staff.html">Nuestro Equipo</a></li>
-                            <li><a href="corporate.html">Alianzas Institucionales</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Pacientes <i class="fas fa-chevron-down text-xs"></i></a>
-                        <ul class="dropdown-content glass-dropdown">
-                            <li><a href="psychotherapy.html">Psicoterapia Online</a></li>
-                            <li><a href="resources_patients.html">Recursos Gratuitos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Profesionales <i
-                                class="fas fa-chevron-down text-xs"></i></a>
-                        <ul class="dropdown-content glass-dropdown">
-                            <li><a href="courses.html">Aula Virtual & Cursos</a></li>
-                            <li><a href="supervision.html">Supervisiones Clínicas</a></li>
-                            <li><a href="resources_pros.html">Biblioteca Digital</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html" class="nav-btn-highlight">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center gap-3 shrink-0">
+        <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto object-contain">
+      </a>
 
-    <section class="section-padding-lg text-center bg-light">
-        <div class="container">
-            <span class="badge-pill" style="background:var(--secondary); color:white; border:none;">Biblioteca de
-                Bienestar</span>
-            <h1>Recursos para Pacientes</h1>
-            <p>Guías, lecturas y herramientas gratuitas para tu salud mental.</p>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-body text-base text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Cedemop <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-52 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Sobre Nosotros</a>
+            <a href="staff.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Staff Profesional</a>
+            <a href="corporate.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Instituciones</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Blog & Noticias</a>
+            <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Contacto</a>
+          </div>
         </div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base font-semibold text-primary border-b-2 border-primary pb-0.5 flex items-center gap-1 py-2">
+            Pacientes <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="psychotherapy.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Psicoterapia Online</a>
+            <a href="resources_patients.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Recursos & Libros</a>
+          </div>
+        </div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Profesionales <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual</a>
+            <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
+            <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Auth UI / CTA -->
+      <div id="auth-ui" class="hidden md:flex items-center gap-4">
+        <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
+          <i class="fas fa-calendar-check mr-2"></i> Reservar Consulta
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-primary p-2 mobile-menu-toggle" aria-label="Menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-28">
+    <!-- Hero Section -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pt-12 pb-12 text-center">
+      <div class="max-w-3xl mx-auto space-y-4">
+        <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container-highest px-4 py-2 rounded-full">Biblioteca & Lecturas</span>
+        <h1 class="font-display text-4xl md:text-5xl text-primary font-normal leading-tight">
+          Recursos para Pacientes
+        </h1>
+        <p class="font-body text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+          Guías, publicaciones y material de lectura sobre salud mental y desarrollo personal.
+        </p>
+      </div>
     </section>
 
-    <section class="section-padding">
-        <div class="container">
-            <!-- Loading Indicator -->
-            <div id="loading-indicator" style="text-align: center; color: var(--text-light);">
-                <i class="fas fa-spinner fa-spin fa-2x"></i>
-                <p>Cargando recursos...</p>
-            </div>
-
-            <div id="resources-grid" class="grid-3">
-                <!-- Javascript will inject cards here -->
-            </div>
-
-            <div id="empty-state" class="hidden text-center" style="grid-column: 1/-1; padding: 40px;">
-                <p>Próximamente subiremos material.</p>
-            </div>
+    <!-- Books & Resources Cards Grid -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-ethereal border border-surface-container-highest p-6 flex flex-col hover:shadow-ethereal-hover transition-all duration-300">
+          <div class="w-full h-64 rounded-2xl overflow-hidden bg-surface-container mb-6">
+            <img src="imagenes/wp-uploads/book-1.jpg" alt="Manual de Psicoterapia" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-headline text-xl text-primary mb-2">Manual de Psicoterapia y Salud Mental</h3>
+          <p class="font-body text-sm text-on-surface-variant mb-6 flex-grow leading-relaxed">
+            Recurso práctico y guía teórica sobre modelos de intervención en psicoterapia clínica y bienestar emocional.
+          </p>
+          <a href="#" class="inline-flex items-center text-sm font-semibold text-secondary hover:text-secondary-container transition-colors group mt-auto">
+            Ver detalle <span class="material-symbols-outlined ml-2 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
         </div>
+
+        <div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-ethereal border border-surface-container-highest p-6 flex flex-col hover:shadow-ethereal-hover transition-all duration-300">
+          <div class="w-full h-64 rounded-2xl overflow-hidden bg-surface-container mb-6">
+            <img src="imagenes/wp-uploads/book-2.jpg" alt="Estrategias de Intervención" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-headline text-xl text-primary mb-2">Estrategias de Intervención en Crisis</h3>
+          <p class="font-body text-sm text-on-surface-variant mb-6 flex-grow leading-relaxed">
+            Herramientas fundamentales para la intervención psicosocial y el manejo de situaciones complejas.
+          </p>
+          <a href="#" class="inline-flex items-center text-sm font-semibold text-secondary hover:text-secondary-container transition-colors group mt-auto">
+            Ver detalle <span class="material-symbols-outlined ml-2 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-ethereal border border-surface-container-highest p-6 flex flex-col hover:shadow-ethereal-hover transition-all duration-300">
+          <div class="w-full h-64 rounded-2xl overflow-hidden bg-surface-container mb-6">
+            <img src="imagenes/wp-uploads/book-3.jpg" alt="Prevención del Suicidio" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-headline text-xl text-primary mb-2">Prevención del Suicidio y Abordaje Integral</h3>
+          <p class="font-body text-sm text-on-surface-variant mb-6 flex-grow leading-relaxed">
+            Guía sobre prevención, factores de protección, evaluación de riesgo y acompañamiento psicosocial.
+          </p>
+          <a href="#" class="inline-flex items-center text-sm font-semibold text-secondary hover:text-secondary-container transition-colors group mt-auto">
+            Ver detalle <span class="material-symbols-outlined ml-2 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </div>
+
+      </div>
     </section>
+  </main>
 
-    <footer class="site-footer-premium">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <h4>CEDEMOP</h4>
-                <p>&copy; 2026 CEDEMOP.</p>
-            </div>
-        </div>
-    </footer>
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-16 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto opacity-90 mb-2">
+      <p class="text-xs text-on-surface-variant opacity-75">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
 
-    <!-- Logic to fetch Resources -->
-    <script type="module">
-        import { db } from './js/firebase-config.js';
-        import { collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        const grid = document.getElementById('resources-grid');
-        const loading = document.getElementById('loading-indicator');
-        const emptyState = document.getElementById('empty-state');
-
-        async function loadResources() {
-            try {
-                // Fetching from 'resources' collection
-                const q = query(collection(db, "resources"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
-
-                loading.classList.add('hidden');
-
-                const defaultResources = [
-                    {
-                        title: 'Manual de Psicoterapia y Salud Mental',
-                        description: 'Recurso práctico y guía teórica sobre modelos de intervención en psicoterapia clínica.',
-                        imageUrl: 'imagenes/wp-uploads/book-1.jpg',
-                        docUrl: '#'
-                    },
-                    {
-                        title: 'Estrategias de Intervención en Crisis',
-                        description: 'Herramientas fundamentales para la intervención psicosocial y manejo de situaciones críticas.',
-                        imageUrl: 'imagenes/wp-uploads/book-2.jpg',
-                        docUrl: '#'
-                    },
-                    {
-                        title: 'Prevención del Suicidio y Abordaje Integral',
-                        description: 'Guía institucional sobre prevención, factores de protección y evaluación de riesgo.',
-                        imageUrl: 'imagenes/wp-uploads/book-3.jpg',
-                        docUrl: '#'
-                    }
-                ];
-
-                const resourcesToDisplay = querySnapshot.empty ? defaultResources : [];
-                
-                if (!querySnapshot.empty) {
-                    querySnapshot.forEach((doc) => {
-                        resourcesToDisplay.push(doc.data());
-                    });
-                }
-
-                resourcesToDisplay.forEach((data) => {
-                    const card = document.createElement('div');
-                    card.className = 'glass-card';
-
-                    const imgUrl = data.imageUrl || 'imagenes/wp-uploads/book-cover-3.jpg';
-
-                    card.innerHTML = `
-                         <div style="height: 220px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
-                            <img src="${imgUrl}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <h3>${data.title}</h3>
-                        <p style="color: var(--text-light); margin-bottom: 15px;">${data.description || 'Sin descripción disponible.'}</p>
-                        <a href="${data.docUrl || '#'}" class="link-arrow">Ver / Leer recurso <i class="fas fa-arrow-right"></i></a>
-                    `;
-                    grid.appendChild(card);
-                });
-
-            } catch (error) {
-                console.error("Error loading resources:", error);
-                loading.classList.add('hidden');
-                // Render default books if offline/error
-                const defaultResources = [
-                    {
-                        title: 'Manual de Psicoterapia y Salud Mental',
-                        description: 'Recurso práctico y guía teórica sobre modelos de intervención en psicoterapia clínica.',
-                        imageUrl: 'imagenes/wp-uploads/book-1.jpg'
-                    },
-                    {
-                        title: 'Estrategias de Intervención en Crisis',
-                        description: 'Herramientas fundamentales para la intervención psicosocial y manejo de situaciones críticas.',
-                        imageUrl: 'imagenes/wp-uploads/book-2.jpg'
-                    },
-                    {
-                        title: 'Prevención del Suicidio y Abordaje Integral',
-                        description: 'Guía institucional sobre prevención, factores de protección y evaluación de riesgo.',
-                        imageUrl: 'imagenes/wp-uploads/book-3.jpg'
-                    }
-                ];
-                defaultResources.forEach((data) => {
-                    const card = document.createElement('div');
-                    card.className = 'glass-card';
-                    card.innerHTML = `
-                         <div style="height: 220px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
-                            <img src="${data.imageUrl}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <h3>${data.title}</h3>
-                        <p style="color: var(--text-light); margin-bottom: 15px;">${data.description}</p>
-                        <a href="#" class="link-arrow">Ver / Leer recurso <i class="fas fa-arrow-right"></i></a>
-                    `;
-                    grid.appendChild(card);
-                });
-            }
-        }
-
-        loadResources();
-    </script>
-    <style>
-        .hidden {
-            display: none !important;
-        }
-    </style>
 </body>
-
 </html>

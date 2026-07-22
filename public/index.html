@@ -1,275 +1,333 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CEDEMOP - Centro de Promoción de Salud Mental</title>
-  <link rel="stylesheet" href="css/style.css?v=4">
-  <!-- Fonts -->
+  <title>CEDEMOP - Centro de Psicoterapia y Formación</title>
+
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts: Libre Caslon Text (Serif) & Manrope (Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-bright": "#fff8f4",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fbf2eb",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "primary-container": "#2d4f42",
+            "on-primary-container": "#9bc0af",
+            "primary-fixed": "#c5ebd9",
+            "primary-fixed-dim": "#a9cfbe",
+            "secondary": "#904c2f",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fea683",
+            "on-secondary-container": "#78391e",
+            "tertiary": "#373229",
+            "tertiary-container": "#4e483e",
+            "tertiary-fixed": "#ebe1d4",
+            "outline": "#717974",
+            "outline-variant": "#c1c8c3"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          spacing: {
+            "gutter": "24px",
+            "margin-mobile": "20px",
+            "margin-desktop": "auto",
+            "max-width": "1140px"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)",
+            "ethereal-hover": "0 30px 60px rgba(45, 79, 66, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .organic-blob {
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      animation: morph 8s ease-in-out infinite;
+    }
+    @keyframes morph {
+      0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+      34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+      67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-content {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+  </style>
+
   <script src="js/script.js" defer></script>
   <script type="module" src="js/auth-nav.js" defer></script>
   <script type="module" src="js/load-blogs.js" defer></script>
 </head>
 
-<body>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
 
-  <!-- Header -->
-  <header class="site-header glass-header">
-    <div class="container header-container">
-      <div class="logo">
-        <a href="index.html">
-          <img src="logo.png"
-            alt="CEDEMOP Logo">
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center gap-3 shrink-0">
+        <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto object-contain">
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-body text-base font-semibold text-primary border-b-2 border-primary pb-0.5">Inicio</a>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Cedemop <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-52 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Sobre Nosotros</a>
+            <a href="staff.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Staff Profesional</a>
+            <a href="corporate.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Instituciones</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Blog & Noticias</a>
+            <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Contacto</a>
+          </div>
+        </div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Pacientes <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="psychotherapy.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Psicoterapia Online</a>
+            <a href="resources_patients.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Recursos & Libros</a>
+          </div>
+        </div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Profesionales <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual</a>
+            <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
+            <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Auth UI / CTA -->
+      <div id="auth-ui" class="hidden md:flex items-center gap-4">
+        <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
+          <i class="fas fa-calendar-check mr-2"></i> Reservar Consulta
         </a>
       </div>
-      <nav class="main-nav">
-        <button class="mobile-menu-toggle" aria-label="Menu">
-          <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-links">
-          <li><a href="index.html">Inicio</a></li>
 
-          <li class="dropdown">
-            <a href="#" class="dropdown-trigger">Cedemop</a>
-            <ul class="dropdown-content">
-              <li><a href="about.html">Sobre Nosotros</a></li>
-              <li><a href="staff.html">Staff</a></li>
-              <li><a href="corporate.html">Instituciones</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="contact.html">Contacto</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-trigger">Pacientes y Familiares</a>
-            <ul class="dropdown-content">
-              <li><a href="psychotherapy.html">Psicoterapia</a></li>
-              <li><a href="resources_patients.html">Recursos</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-trigger">Profesionales</a>
-            <ul class="dropdown-content">
-              <li><a href="courses.html">Catálogo de Cursos</a></li>
-              <li><a href="aula.html">Clase en Vivo (Test)</a></li>
-              <li><a href="resources_pros.html">Recursos</a></li>
-              <li><a href="supervision.html">Supervisiones</a></li>
-            </ul>
-          </li>
-
-          <!-- Contenedor Dinámico para Auth y Admin -->
-          <li id="auth-ui">
-            <a href="admin.html" class="nav-btn-highlight"><i class="fas fa-user-circle"></i> Ingresar</a>
-          </li>
-        </ul>
-      </nav>
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-primary p-2 mobile-menu-toggle" aria-label="Menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
     </div>
   </header>
 
-  <!-- Hero Section (Split Layout) -->
-  <section class="hero-section">
-    <div class="hero-split-container">
-      <div class="hero-text-side reveal">
-        <h1>Promoviendo la Salud Mental con Ciencia y Empatía</h1>
-        <p>Programas de capacitación, psicoterapia y recursos especializados para profesionales y pacientes.</p>
-        <div class="hero-btns">
-          <a href="#services" class="btn-hero">Nuestros Servicios</a>
-          <a href="contact.html" class="btn-hero-secondary dark-text">Contáctanos</a>
+  <main class="flex-grow pt-28">
+    <!-- Hero Section: Soulful Modernism -->
+    <section class="relative px-6 md:px-12 max-w-[1240px] mx-auto py-12 md:py-20 flex flex-col md:flex-row items-center gap-12 min-h-[75vh]">
+      <div class="flex-1 space-y-6 z-10">
+        <div class="inline-flex items-center gap-2 bg-surface-container-highest px-4 py-2 rounded-full">
+          <span class="material-symbols-outlined text-secondary text-base" style="font-variation-settings: 'FILL' 1;">spa</span>
+          <span class="text-xs font-semibold text-on-surface-variant uppercase tracking-widest">Salud Mental & Ciencia</span>
+        </div>
+        
+        <h1 class="font-display text-4xl md:text-6xl text-primary font-normal leading-tight">
+          Promoviendo la Salud Mental con Ciencia y Empatía.
+        </h1>
+        
+        <p class="font-body text-lg text-on-surface-variant max-w-xl leading-relaxed">
+          Un santuario para tu bienestar emocional. Combinamos la psicoterapia basada en evidencia con un enfoque profundamente humano y cálido para guiarte hacia la claridad y la paz interior.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <a href="psychotherapy.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-8 py-4 rounded-full font-semibold text-base hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5 text-center">
+            Ver Servicios Terapéuticos
+          </a>
+          <a href="staff.html" class="inline-flex items-center justify-center bg-transparent border-2 border-surface-container-highest text-primary px-8 py-4 rounded-full font-semibold text-base hover:bg-surface-container-highest transition-all text-center">
+            Conocer a Nuestro Equipo
+          </a>
         </div>
       </div>
-      <div class="hero-image-side">
-        <img src="imagenes/banner cedemop.png?v=2" alt="CEDEMOP Hero Banner">
-      </div>
-    </div>
-  </section>
 
-  <!-- Help Carousel Section -->
-  <section class="help-carousel-section reveal">
-    <div class="container">
-      <div class="help-slider">
-        <!-- Slide 1 -->
-        <div class="help-slide active">
-          <div class="help-image">
-            <img src="https://cedemop.com/wp-content/uploads/2024/02/portrait-happy-senior-couple-arms-scaled.jpg"
-              alt="Estamos para ayudar">
+      <!-- Hero Visual Image with Organic Blob -->
+      <div class="flex-1 relative w-full aspect-square md:aspect-auto md:h-[540px] flex justify-center items-center">
+        <div class="absolute inset-0 bg-secondary-container/20 organic-blob blur-3xl opacity-70"></div>
+        <div class="absolute inset-8 bg-primary-fixed/30 organic-blob blur-2xl opacity-60" style="animation-delay: -4s;"></div>
+        
+        <div class="relative w-full md:w-11/12 h-full organic-blob overflow-hidden shadow-ethereal z-10 border-4 border-surface">
+          <img src="imagenes/wp-uploads/young-beautiful-woman-lying-by-lake-1.jpg" alt="CEDEMOP Salud Mental" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Floating Glass Card -->
+        <div class="absolute -bottom-4 md:bottom-8 -left-4 md:-left-8 glass-panel p-5 rounded-2xl shadow-ethereal max-w-xs z-20 hidden sm:block">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-secondary/15 rounded-full flex items-center justify-center text-secondary shrink-0">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            </div>
+            <div>
+              <p class="font-semibold text-primary text-sm m-0">Atención Empática</p>
+              <p class="text-on-surface-variant text-xs m-0">Diseñada a la medida de tu proceso personal.</p>
+            </div>
           </div>
-          <div class="help-content">
-            <span class="section-subtitle">Compromiso</span>
-            <h2>Estamos Para Ayudar</h2>
-            <p>Brindamos apoyo integral y profesional para mejorar la calidad de vida de nuestros pacientes. Nuestro
-              enfoque se basa en la evidencia científica y la calidez humana.</p>
-            <a href="contact.html" class="btn-help">SOLICITAR INFORMACIÓN</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Bento Grid Section -->
+    <section class="bg-surface-container-low py-20 px-6 md:px-12">
+      <div class="max-w-[1240px] mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="font-headline text-3xl md:text-4xl text-primary mb-4">Rutas de Acompañamiento Terapéutico</h2>
+          <p class="font-body text-lg text-on-surface-variant">Ofrecemos espacios especializados diseñados para acompañarte con calidez, promoviendo el crecimiento personal en un entorno seguro.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Service 1: Psicoterapia Individual -->
+          <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal hover:shadow-ethereal-hover transition-all duration-300 border border-surface-container-highest flex flex-col h-full md:col-span-2">
+            <div class="w-14 h-14 bg-surface-container rounded-2xl flex items-center justify-center text-primary mb-6">
+              <span class="material-symbols-outlined text-3xl">person</span>
+            </div>
+            <h3 class="font-headline text-2xl text-primary mb-3">Psicoterapia Individual Online</h3>
+            <p class="font-body text-on-surface-variant mb-6 flex-grow leading-relaxed">
+              Un espacio dedicado a la autoexploración y la sanación. Abordamos ansiedad, depresión, duelo y transiciones de vida con estrategias personalizadas adaptadas a ti.
+            </p>
+            <a href="psychotherapy.html" class="inline-flex items-center text-secondary font-semibold hover:text-secondary-container transition-colors group">
+              Saber más sobre psicoterapia <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Service 2: Acompañamiento en Crisis / Parejas -->
+          <div class="bg-primary text-on-primary p-8 rounded-3xl shadow-ethereal flex flex-col h-full relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full"></div>
+            <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-on-primary mb-6 relative z-10">
+              <span class="material-symbols-outlined text-3xl">favorite</span>
+            </div>
+            <h3 class="font-headline text-2xl mb-3 relative z-10">Intervención en Crisis y Parejas</h3>
+            <p class="font-body text-on-primary/80 mb-6 flex-grow relative z-10 leading-relaxed">
+              Reconstrucción del vínculo, comunicación asertiva y contención clínica ante momentos críticos.
+            </p>
+            <a href="psychotherapy.html" class="inline-flex items-center font-semibold text-on-primary hover:text-white transition-colors relative z-10 underline decoration-white/30 underline-offset-4">
+              Conocer más detalles
+            </a>
+          </div>
+
+          <!-- Service 3: Formación y Supervisión Clínica -->
+          <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal hover:shadow-ethereal-hover transition-all duration-300 border border-surface-container-highest flex flex-col h-full md:col-span-3 lg:col-span-1">
+            <div class="relative w-full h-44 rounded-2xl overflow-hidden mb-6 bg-surface-container">
+              <img src="imagenes/wp-uploads/312207595_1964040763781774_318542561535812704_n.jpg" alt="Formación CEDEMOP" class="w-full h-full object-cover">
+            </div>
+            <div class="w-12 h-12 bg-surface-container rounded-2xl flex items-center justify-center text-primary mb-4">
+              <span class="material-symbols-outlined text-2xl">school</span>
+            </div>
+            <h3 class="font-headline text-xl text-primary mb-3">Supervisión y Formación Profesional</h3>
+            <p class="font-body text-sm text-on-surface-variant mb-6 flex-grow leading-relaxed">
+              Supervisiones clínicas para profesionales de la salud mental y talleres de capacitación especializada.
+            </p>
+            <a href="supervision.html" class="inline-flex items-center text-secondary font-semibold hover:text-secondary-container transition-colors group text-sm">
+              Ver programas <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
           </div>
         </div>
-        <!-- Slide 2 -->
-        <div class="help-slide">
-          <div class="help-image">
-            <img src="https://cedemop.com/wp-content/uploads/2024/02/young-beautiful-woman-lying-by-lake-1-scaled.jpg"
-              alt="Bienestar Emocional">
-          </div>
-          <div class="help-content">
-            <span class="section-subtitle">Bienestar</span>
-            <h2>Equilibrio y Salud Mental</h2>
-            <p>Descubre herramientas para el manejo del estrés y la ansiedad en nuestra vida diaria, construyendo un
-              futuro más saludable y pleno.</p>
-            <a href="contact.html" class="btn-help">CONOCE MÁS</a>
-          </div>
+      </div>
+    </section>
+
+    <!-- Recent Blog Articles Section -->
+    <section class="py-20 px-6 md:px-12 max-w-[1240px] mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-semibold text-secondary uppercase tracking-widest">Divulgación & Ciencia</span>
+          <h2 class="font-headline text-3xl md:text-4xl text-primary mt-2">Últimas Publicaciones</h2>
         </div>
-
-        <div class="help-controls">
-          <button class="prev-slide" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-          <button class="next-slide" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
-        </div>
+        <a href="blog.html" class="inline-flex items-center text-primary font-semibold hover:text-secondary transition-colors mt-4 md:mt-0">
+          Ver todos los artículos <span class="material-symbols-outlined ml-2">arrow_forward</span>
+        </a>
       </div>
 
-      <div class="help-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
+      <div id="blog-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- JS will inject dynamic blog posts or fallback to authentic suicide prevention article -->
       </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-6 md:px-12 max-w-[1240px] mx-auto text-center">
+      <div class="bg-surface-container p-10 md:p-16 rounded-3xl border border-surface-container-highest flex flex-col items-center shadow-ethereal">
+        <h2 class="font-headline text-3xl md:text-4xl text-primary mb-4 max-w-2xl">¿Listo para dar el primer paso hacia tu bienestar?</h2>
+        <p class="font-body text-lg text-on-surface-variant mb-8 max-w-xl">Coordiná una primera consulta confidencial con nuestro equipo de profesionales.</p>
+        <a href="contact.html" class="inline-flex items-center justify-center bg-secondary text-on-secondary px-8 py-4 rounded-full font-semibold text-base hover:bg-secondary/90 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+          <i class="fas fa-calendar-alt mr-2"></i> Solicitar Consulta Inicial
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer: Soulful Modernism -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-16 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto opacity-90 mb-2">
+      
+      <div class="flex flex-wrap justify-center gap-x-8 gap-y-3">
+        <a href="about.html" class="text-sm text-on-surface-variant hover:text-primary transition-colors">Sobre Nosotros</a>
+        <a href="staff.html" class="text-sm text-on-surface-variant hover:text-primary transition-colors">Staff</a>
+        <a href="psychotherapy.html" class="text-sm text-on-surface-variant hover:text-primary transition-colors">Psicoterapia</a>
+        <a href="resources_patients.html" class="text-sm text-on-surface-variant hover:text-primary transition-colors">Recursos</a>
+        <a href="blog.html" class="text-sm text-on-surface-variant hover:text-primary transition-colors">Blog</a>
+        <a href="contact.html" class="text-sm text-on-surface-variant hover:text-primary transition-colors">Contacto</a>
+      </div>
+
+      <p class="text-xs text-on-surface-variant opacity-75 mt-4">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental & Psicoterapia. Todos los derechos reservados.
+      </p>
     </div>
-  </section>
+  </footer>
 
-  <!-- About Section -->
-  <section id="about" class="about-section section-padding reveal">
-    <div class="container grid-2">
-      <div class="about-text">
-        <h2>Sobre Nosotros</h2>
-        <p>Somos un centro comprometido en la promoción de la salud mental con respaldo científico y enfoque crítico a
-          través de implementación y desarrollo de programas de capacitación de cursos y diplomaturas para profesionales
-          y estudiantes de Psicología, Trabajo Social, Pedagogía y otras áreas del Desarrollo Humano.</p>
-        <p>Desarrollamos charlas y programas de intervención para instituciones de: educación; salud; niñez,
-          adolescencia y familia; y empresas en general. Además, ofrecemos servicios de psicoterapia virtual y
-          presencial.</p>
-        <p><strong>CEDEMOP</strong> está conformado por profesionales de Chile, Paraguay, Colombia, Ecuador, Cuba,
-          Argentina, Bolivia, Perú, España, Alemania, entre otros.</p>
-      </div>
-      <div class="about-image">
-        <img src="https://cedemop.com/wp-content/uploads/2024/02/mental-health-care-sketch-diagram-1-1024x761.jpg"
-          alt="Salud Mental Diagrama">
-      </div>
-    </div>
-  </section>
-
-  <!-- Quote Section -->
-  <section class="quote-section">
-    <div class="container">
-      <blockquote>
-        "La educación emocional cultiva la empatía, construyendo puentes de conexión entre las personas"
-        <cite>Daniel Goleman</cite>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- Services / Talleres -->
-  <section id="services" class="services-section section-padding reveal">
-    <div class="container">
-      <div class="section-title">
-        <h2>Nuestros Servicios</h2>
-        <p>Soluciones integrales para el bienestar emocional y el desarrollo profesional.</p>
-      </div>
-      <div class="grid-3">
-        <div class="service-card">
-          <i class="fas fa-brain"></i>
-          <h3>Funciones Ejecutivas en el Aprendizaje</h3>
-          <p>Claves para la intervención dentro y fuera del aula.</p>
-          <a href="courses.html" class="btn-primary" style="margin-top: 15px; display: inline-block;">Ver Curso</a>
-        </div>
-        <div class="service-card">
-          <i class="fas fa-hands-helping"></i>
-          <h3>Intervención en Trauma y Disociación</h3>
-          <p>Estrategias y técnicas de intervención un modelo integrador.</p>
-          <a href="courses.html" class="btn-primary" style="margin-top: 15px; display: inline-block;">Ver Curso</a>
-        </div>
-        <div class="service-card">
-          <i class="fas fa-puzzle-piece"></i>
-          <h3>Neuroeducación</h3>
-          <p>Preguntas y respuestas sobre neuroeducación y su aplicación.</p>
-          <a href="courses.html" class="btn-primary" style="margin-top: 15px; display: inline-block;">Ver Webinar</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blog Section -->
-  <section id="blog" class="blog-section section-padding reveal">
-    <div class="container">
-      <div class="section-title">
-        <h2>Nuestro Blog</h2>
-        <p>Novedades y artículos de interés sobre salud mental.</p>
-      </div>
-      <div class="blog-grid" id="blog-container">
-        <!-- Loader / Skeleton while fetching -->
-        <p style="text-align: center; width: 100%; color: var(--text-light);">Cargando artículos recientes...</p>
-      </div>
-      <!-- Add a link to the full blog page -->
-      <div style="text-align: center; margin-top: 30px;">
-        <a href="blog.html" class="btn-primary" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">Ver Todos los Artículos</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Section -->
-  <section class="video-section section-padding">
-    <div class="container">
-      <h2>Comunicación Positiva</h2>
-      <div class="video-wrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/cVB3brOy4YU" title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact CTA Section -->
-  <section class="quote-section">
-    <div class="container">
-      <blockquote>
-        "¿Necesitas ayuda o más información?"
-        <cite style="color: rgba(255,255,255,0.8); margin-top: 10px; font-style: normal;">Contáctanos hoy mismo para
-          comenzar</cite>
-      </blockquote>
-      <a href="contact.html" class="btn-hero"
-        style="background: var(--dark-bg); margin-top: 40px; border: 1px solid rgba(255,255,255,0.2);">Ir a la página de
-        Contacto</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2026 CEDEMOP. Todos los derechos reservados.</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-    <!-- Reveal Animation Script -->
-    <script>
-      function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
-        for (var i = 0; i < reveals.length; i++) {
-          var windowHeight = window.innerHeight;
-          var elementTop = reveals[i].getBoundingClientRect().top;
-          var elementVisible = 100;
-          if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
-          }
-        }
-      }
-      window.addEventListener("scroll", reveal);
-      // Para activar los primeros elementos inmediatamente
-      reveal();
-    </script>
 </body>
-
 </html>

@@ -4,3 +4,4 @@ node_modules/
 public/js/firebase-config.js
 *.sql
 domains/
+stitch/

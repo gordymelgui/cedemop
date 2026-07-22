@@ -1,104 +1,243 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Psicoterapia - CEDEMOP</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="js/script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Psicoterapia - CEDEMOP</title>
+
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-bright": "#fff8f4",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fbf2eb",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "primary-container": "#2d4f42",
+            "on-primary-container": "#9bc0af",
+            "secondary": "#904c2f",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fea683",
+            "tertiary": "#373229",
+            "tertiary-container": "#4e483e",
+            "tertiary-fixed": "#ebe1d4",
+            "outline": "#717974",
+            "outline-variant": "#c1c8c3"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)",
+            "ethereal-hover": "0 30px 60px rgba(45, 79, 66, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-content {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+  </style>
+
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/auth-nav.js" defer></script>
 </head>
 
-<body>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
 
-    <header class="site-header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="logo.png"
-                        alt="CEDEMOP Logo">
-                </a>
-            </div>
-            <nav class="main-nav">
-                <button class="mobile-menu-toggle" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Inicio</a></li>
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center gap-3 shrink-0">
+        <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto object-contain">
+      </a>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Cedemop</a>
-                        <ul class="dropdown-content">
-                            <li><a href="about.html">Sobre Nosotros</a></li>
-                            <li><a href="staff.html">Staff</a></li>
-                            <li><a href="corporate.html">Instituciones</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contacto</a></li>
-                        </ul>
-                    </li>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-body text-base text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Pacientes y Familiares</a>
-                        <ul class="dropdown-content active">
-                            <li><a href="psychotherapy.html">Psicoterapia</a></li>
-                            <li><a href="resources_patients.html">Recursos</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Profesionales</a>
-                        <ul class="dropdown-content">
-                            <li><a href="courses.html">Aula Virtual</a></li>
-                            <li><a href="resources_pros.html">Recursos</a></li>
-                            <li><a href="supervision.html">Supervisiones</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Cedemop <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-52 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Sobre Nosotros</a>
+            <a href="staff.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Staff Profesional</a>
+            <a href="corporate.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Instituciones</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Blog & Noticias</a>
+            <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Contacto</a>
+          </div>
         </div>
-    </header>
 
-    <section class="section-padding"
-        style="background-color: var(--secondary-color); color: var(--white); text-align: center;">
-        <div class="container">
-            <h1>Psicoterapia</h1>
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base font-semibold text-primary border-b-2 border-primary pb-0.5 flex items-center gap-1 py-2">
+            Pacientes <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="psychotherapy.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Psicoterapia Online</a>
+            <a href="resources_patients.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Recursos & Libros</a>
+          </div>
         </div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Profesionales <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual</a>
+            <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
+            <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Auth UI / CTA -->
+      <div id="auth-ui" class="hidden md:flex items-center gap-4">
+        <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
+          <i class="fas fa-calendar-check mr-2"></i> Reservar Consulta
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-primary p-2 mobile-menu-toggle" aria-label="Menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-28">
+    <!-- Hero Section -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pt-12 pb-16 text-center">
+      <div class="max-w-3xl mx-auto space-y-4">
+        <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-surface-container-highest px-4 py-2 rounded-full">Servicios de Psicoterapia</span>
+        <h1 class="font-display text-4xl md:text-5xl text-primary font-normal leading-tight">
+          Nuestros Servicios de Psicoterapia
+        </h1>
+        <p class="font-body text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+          Atención psicológica especializada y basada en evidencia científica. Espacios seguros de acompañamiento diseñados para tu salud emocional y bienestar duradero.
+        </p>
+      </div>
     </section>
 
-    <section class="section-padding">
-        <div class="container">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h2>Atención Psicológica</h2>
-                <p>Ofrecemos servicios de psicoterapia virtual y presencial para niños, adolescentes, adultos y familias
-                    (terapia familiar y de pareja).</p>
-                <br>
-                <div style="background: #f9f9f9; padding: 20px; border-left: 5px solid var(--primary-color);">
-                    <p><strong>Nota:</strong> Esta sección está en construcción. Próximamente encontrará más información
-                        detallada sobre nuestros enfoques terapéuticos.</p>
-                </div>
-                <br>
-                <a href="contact.html" class="btn-primary">Solicitar Hora</a>
+    <!-- Services Bento Grid Section (Stitch) -->
+    <section class="max-w-[1240px] mx-auto px-6 md:px-12 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Individual Therapy -->
+        <article class="col-span-1 md:col-span-8 bg-surface-container-lowest rounded-3xl p-8 md:p-12 shadow-ethereal hover:shadow-ethereal-hover border border-surface-container-highest flex flex-col md:flex-row gap-8 items-center group transition-all duration-500">
+          <div class="flex-1 order-2 md:order-1">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-tertiary-fixed rounded-full mb-4">
+              <span class="material-symbols-outlined text-sm text-tertiary">person</span>
+              <span class="text-xs font-semibold text-tertiary uppercase tracking-wider">Psicoterapia Individual</span>
             </div>
-        </div>
+            <h2 class="font-headline text-2xl md:text-3xl text-primary mb-3">Navegando tu Mundo Interior</h2>
+            <p class="font-body text-on-surface-variant mb-6 leading-relaxed">
+              Un espacio dedicado para abordar ansiedad, depresión, duelo y transiciones de vida. Nuestras sesiones de terapia online te brindan contención y estrategias personalizadas.
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-lg">spa</span>
+                <span class="font-body text-on-surface">Manejo del Estrés y Ansiedad</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-lg">psychology</span>
+                <span class="font-body text-on-surface">Abordaje de Depresión y Estado de Ánimo</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-secondary text-lg">trending_up</span>
+                <span class="font-body text-on-surface">Desarrollo Personal y Autoestima</span>
+              </li>
+            </ul>
+            <a href="contact.html" class="inline-flex items-center font-semibold text-secondary hover:text-secondary-container transition-colors group">
+              Solicitar sesión <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+          </div>
+          <div class="w-full md:w-5/12 aspect-[4/5] rounded-2xl overflow-hidden order-1 md:order-2">
+            <img src="imagenes/wp-uploads/young-family-with-children-autumn-park-1.jpg" alt="Psicoterapia Individual" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          </div>
+        </article>
+
+        <!-- Couples Therapy -->
+        <article class="col-span-1 md:col-span-4 bg-tertiary-fixed rounded-3xl p-8 md:p-10 shadow-ethereal flex flex-col justify-between group transition-all duration-500 hover:shadow-ethereal-hover">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-surface-container-lowest/60 rounded-full mb-6 backdrop-blur-sm">
+              <span class="material-symbols-outlined text-sm text-tertiary">favorite</span>
+              <span class="text-xs font-semibold text-tertiary uppercase tracking-wider">Parejas</span>
+            </div>
+            <h2 class="font-headline text-2xl text-primary mb-3">Reconstruyendo el Vínculo</h2>
+            <p class="font-body text-tertiary-container mb-6 leading-relaxed">
+              Fomentar la comunicación abierta, fortalecer la empatía mutua y navegar desafíos relacionales en un entorno neutral.
+            </p>
+          </div>
+          <div class="mt-auto relative w-full aspect-square rounded-2xl overflow-hidden">
+            <img src="imagenes/wp-uploads/portrait-happy-senior-couple-arms.jpg" alt="Terapia de Pareja" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          </div>
+        </article>
+
+      </div>
     </section>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2024 CEDEMOP. Todos los derechos reservados.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-    </footer>
+    <!-- CTA Section -->
+    <section class="py-16 px-6 md:px-12 max-w-[1240px] mx-auto text-center">
+      <div class="bg-surface-container p-10 md:p-16 rounded-3xl border border-surface-container-highest flex flex-col items-center shadow-ethereal">
+        <h2 class="font-headline text-3xl md:text-4xl text-primary mb-4 max-w-2xl">¿Querés coordinar tu primera consulta?</h2>
+        <p class="font-body text-lg text-on-surface-variant mb-8 max-w-xl">Ponete en contacto con nuestro equipo para orientarte en la modalidad y profesional más adecuado.</p>
+        <a href="contact.html" class="inline-flex items-center justify-center bg-secondary text-on-secondary px-8 py-4 rounded-full font-semibold text-base hover:bg-secondary/90 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+          <i class="fas fa-envelope mr-2"></i> Enviar Mensaje de Consulta
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-16 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto opacity-90 mb-2">
+      <p class="text-xs text-on-surface-variant opacity-75">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
 
 </body>
-
 </html>
