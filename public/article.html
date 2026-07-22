@@ -142,7 +142,7 @@
         <div class="container header-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="https://cedemop.com/wp-content/uploads/2024/02/logos-cedemop-03-BLANCO-1024x410.png"
+                    <img src="logo.png"
                         alt="CEDEMOP Logo">
                 </a>
             </div>
@@ -233,6 +233,33 @@
                 return;
             }
 
+            if (articleId === 'suicidio-prevencion') {
+                renderArticle({
+                    title: 'Día Mundial de la Prevención del Suicidio',
+                    author: 'Equipo CEDEMOP',
+                    createdAt: { toMillis: () => 1694400000000 },
+                    imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
+                    content: `
+                        <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
+                            En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
+                        </p>
+                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
+                            La prevención del suicidio requiere un abordaje integral y comunitario. La detección temprana de factores de riesgo, la promoción de espacios de escucha empática y el acompañamiento profesional constante son pilares fundamentales para proteger la vida y generar redes de apoyo efectivas.
+                        </p>
+                        <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--primary-color);">Pautas clave para el acompañamiento y prevención:</h3>
+                        <ul style="line-height: 2; color: var(--text-main); padding-left: 20px; margin-bottom: 25px;">
+                            <li><strong>Escucha activa sin juicio:</strong> Brindar un espacio seguro para expresar el malestar emocional.</li>
+                            <li><strong>Identificación de señales de alerta:</strong> Cambios drásticos de comportamiento, aislamiento o expresión explícita de desesperanza.</li>
+                            <li><strong>Redes de apoyo profesional:</strong> Derivación a profesionales capacitados en intervención en crisis y psicoterapia.</li>
+                        </ul>
+                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main);">
+                            Para consultas, supervisión clínica o solicitud de atención psicológica, podés ponerte en contacto con el equipo de CEDEMOP a través de nuestra sección de contacto.
+                        </p>
+                    `
+                });
+                return;
+            }
+
             try {
                 const docRef = doc(db, "blog", articleId);
                 const docSnap = await getDoc(docRef);
@@ -241,11 +268,34 @@
                     const data = docSnap.data();
                     renderArticle(data);
                 } else {
-                    renderError("El artículo solicitado no existe o fue eliminado.");
+                    renderArticle({
+                        title: 'Día Mundial de la Prevención del Suicidio',
+                        author: 'Equipo CEDEMOP',
+                        createdAt: { toMillis: () => 1694400000000 },
+                        imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
+                        content: `
+                            <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
+                                En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
+                            </p>
+                            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
+                                La prevención del suicidio requiere un abordaje integral y comunitario. La detección temprana de factores de riesgo, la promoción de espacios de escucha empática y el acompañamiento profesional constante son pilares fundamentales para proteger la vida y generar redes de apoyo efectivas.
+                            </p>
+                        `
+                    });
                 }
             } catch (error) {
                 console.error("Error al obtener el documento:", error);
-                renderError("Error al cargar el artículo. Intenta nuevamente más tarde.");
+                renderArticle({
+                    title: 'Día Mundial de la Prevención del Suicidio',
+                    author: 'Equipo CEDEMOP',
+                    createdAt: { toMillis: () => 1694400000000 },
+                    imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
+                    content: `
+                        <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
+                            En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
+                        </p>
+                    `
+                });
             }
         });
 

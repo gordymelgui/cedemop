@@ -1,0 +1,117 @@
+{
+  "coursesSummary": [
+    {
+      "title": "Curso de Prueba"
+    },
+    {
+      "title": "Sample course"
+    }
+  ],
+  "lessonsCount": 66,
+  "sampleLessons": [
+    {
+      "title": "Conceptos introductorios."
+    },
+    {
+      "title": "Lesson 2"
+    },
+    {
+      "title": "Lesson 3"
+    },
+    {
+      "title": "Lesson 4"
+    },
+    {
+      "title": "Lesson 5"
+    },
+    {
+      "title": "Lesson 6"
+    },
+    {
+      "title": "Lesson 7"
+    },
+    {
+      "title": "Lesson 8"
+    },
+    {
+      "title": "Lesson 9"
+    },
+    {
+      "title": "Lesson 10"
+    },
+    {
+      "title": "Lesson 11"
+    },
+    {
+      "title": "Lesson 12"
+    },
+    {
+      "title": "Lesson 13"
+    },
+    {
+      "title": "Lesson 14"
+    },
+    {
+      "title": "Lesson 15"
+    },
+    {
+      "title": "Lesson 16"
+    },
+    {
+      "title": "Lesson 17"
+    },
+    {
+      "title": "Lesson 18"
+    },
+    {
+      "title": "Lesson 19"
+    },
+    {
+      "title": "Lesson 20"
+    }
+  ],
+  "pagesSummary": [
+    {
+      "title": "Blog"
+    },
+    {
+      "title": "Home"
+    },
+    {
+      "title": "Día Mundial de la Prevención del Suicidio"
+    },
+    {
+      "title": "Contacto"
+    },
+    {
+      "title": "Menú"
+    },
+    {
+      "title": "Sobre Nosotros"
+    },
+    {
+      "title": "Checkout"
+    },
+    {
+      "title": "Profile"
+    },
+    {
+      "title": "All Courses"
+    },
+    {
+      "title": "Instructors"
+    },
+    {
+      "title": "Instructor"
+    },
+    {
+      "title": "Become A Teacher"
+    },
+    {
+      "title": "Term Conditions"
+    },
+    {
+      "title": "Staff"
+    }
+  ]
+}

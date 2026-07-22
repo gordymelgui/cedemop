@@ -1,0 +1,29 @@
+{
+  "siteInfo": {
+    "name": "CEDEMOP",
+    "description": "Centro de Psicoterapia, Supervisión Clínica y Formación",
+    "email": "contacto@cedemop.com"
+  },
+  "pages": [],
+  "posts": [],
+  "books": [
+    {
+      "id": "book-1",
+      "title": "Manual de Psicoterapia y Salud Mental",
+      "image": "imagenes/wp-uploads/book-1.jpg",
+      "description": "Recurso práctico y guía teórica sobre modelos de intervención en psicoterapia clínica."
+    },
+    {
+      "id": "book-2",
+      "title": "Estrategias de Intervención en Crisis",
+      "image": "imagenes/wp-uploads/book-2.jpg",
+      "description": "Herramientas fundamentales para profesionales de la salud mental en momentos de crisis."
+    },
+    {
+      "id": "book-3",
+      "title": "Prevención del Suicidio y Abordaje Integral",
+      "image": "imagenes/wp-uploads/book-3.jpg",
+      "description": "Guía sobre prevención, evaluación de riesgo y acompañamiento psicosocial."
+    }
+  ]
+}

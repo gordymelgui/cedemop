@@ -19,8 +19,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         blogContainer.innerHTML = '';
         
         if (querySnapshot.empty) {
-            blogContainer.innerHTML = '<p style="text-align: center; width: 100%; color: var(--text-light);">Aún no hay artículos publicados. ¡Vuelve pronto!</p>';
-            blogContainer.style.gridTemplateColumns = "1fr";
+            const defaultArticles = [
+                {
+                    id: 'suicidio-prevencion',
+                    title: 'Día Mundial de la Prevención del Suicidio',
+                    summary: 'Reflexiones y herramientas clínicas sobre el abordaje preventivo, la evaluación de riesgo y el acompañamiento psicosocial.',
+                    date: '11 sep. 2023',
+                    imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg'
+                }
+            ];
+
+            defaultArticles.forEach(data => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                card.innerHTML = `
+                    <div class="blog-image">
+                        <a href="article.html?id=${data.id}">
+                            <img src="${data.imageUrl}" alt="${data.title}">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">${data.date}</div>
+                        <h3><a href="article.html?id=${data.id}" style="color: inherit; text-decoration: none;">${data.title}</a></h3>
+                        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px;">${data.summary}</p>
+                        <a href="article.html?id=${data.id}" class="read-more">Leer artículo <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                `;
+                blogContainer.appendChild(card);
+            });
             return;
         }
 

@@ -20,7 +20,7 @@
         <div class="container header-container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="https://cedemop.com/wp-content/uploads/2024/02/logos-cedemop-03-BLANCO-1024x410.png"
+                    <img src="logo.png"
                         alt="CEDEMOP Logo">
                 </a>
             </div>
@@ -115,8 +115,34 @@
                 container.innerHTML = ''; // Clear loader
                 
                 if (snapshot.empty) {
-                    container.innerHTML = '<p style="text-align: center; width: 100%; color: var(--text-light);">No hay artículos disponibles por el momento.</p>';
-                    container.style.gridTemplateColumns = "1fr";
+                    const defaultArticles = [
+                        {
+                            id: 'suicidio-prevencion',
+                            title: 'Día Mundial de la Prevención del Suicidio',
+                            summary: 'Reflexiones y herramientas clínicas sobre el abordaje preventivo, la evaluación de riesgo y el acompañamiento psicosocial.',
+                            date: '11 sep. 2023',
+                            imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg'
+                        }
+                    ];
+
+                    defaultArticles.forEach(data => {
+                        const card = document.createElement('div');
+                        card.className = 'blog-card';
+                        card.innerHTML = `
+                            <div class="blog-image">
+                                <a href="article.html?id=${data.id}">
+                                    <img src="${data.imageUrl}" alt="${data.title}">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-date">${data.date}</div>
+                                <h3><a href="article.html?id=${data.id}" style="color: inherit; text-decoration: none;">${data.title}</a></h3>
+                                <p style="font-size: 0.95rem; color: var(--text-light); margin-bottom: 20px;">${data.summary}</p>
+                                <a href="article.html?id=${data.id}" class="read-more">Leer artículo <i class="fas fa-arrow-right" style="margin-left: 5px;"></i></a>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
                     return;
                 }
 
