@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Día Mundial de la Prevención del Suicidio - CEDEMOP Blog</title>
+  <title>Día Mundial de la Prevención del Suicidio - CEDEMOP</title>
 
   <!-- Tailwind CSS & Custom Config -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -135,7 +135,7 @@
   </header>
 
   <main id="article-app" class="flex-grow pt-28 pb-20">
-    <!-- Article Container (Injected by JS or Default Authentic Content) -->
+    <!-- Article Container -->
   </main>
 
   <!-- Footer -->
@@ -148,7 +148,7 @@
     </div>
   </footer>
 
-  <!-- Firebase & Dynamic Article Logic -->
+  <!-- Dynamic Article Rendering Script -->
   <script type="module">
     import { db } from './js/firebase-config.js';
     import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -158,7 +158,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const articleId = urlParams.get('id') || 'suicidio-prevencion';
 
-      // Check LocalStorage first for articles published via Admin CRM
+      // Local storage check
       const localArticles = JSON.parse(localStorage.getItem('cedemop_published_articles') || '[]');
       const localArticle = localArticles.find(a => a.id === articleId || a.slug === articleId);
 
@@ -172,52 +172,119 @@
           title: 'Día Mundial de la Prevención del Suicidio',
           category: 'Prevención & Salud Mental',
           author: 'Equipo CEDEMOP',
-          date: '10 sept. 2023',
+          date: '11 sep. 2023',
           imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
           content: `
             <p class="text-lg text-on-surface leading-relaxed mb-6 font-medium">
-              En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
+              El suicidio es una urgencia vital ubicada no sólo en un contexto biográfico de pérdida de la salud de la persona, sino también de debilitamiento de sus redes afectivas y sociales.
             </p>
             
             <p class="text-base text-on-surface-variant leading-relaxed mb-6">
-              La prevención del suicidio requiere un abordaje integral, ético y comunitario. La detección temprana de factores de riesgo, la promoción de espacios de escucha empática sin juzgar y el acompañamiento profesional constante son pilares fundamentales para proteger la vida y generar redes de apoyo efectivas.
+              Así, en la toma de decisiones de una persona que se implica en una conducta suicida hay tres componentes básicos: 
+              <br><strong class="text-primary">a) A nivel emocional:</strong> un sufrimiento intenso;
+              <br><strong class="text-primary">b) A nivel conductual:</strong> una carencia de recursos psicológicos para hacerle frente; y 
+              <br><strong class="text-primary">c) A nivel cognitivo:</strong> una desesperanza profunda ante el futuro, acompañada de la percepción de la muerte como única salida.
             </p>
 
             <blockquote class="my-8 p-6 bg-surface-container rounded-3xl border-l-4 border-secondary text-primary font-headline text-xl italic leading-relaxed shadow-sm">
-              "Crear esperanza a través de la acción significa recordar a quienes atraviesan un dolor profundo que existen espacios de contención, profesionales capacitados y redes humanas dispuestas a escuchar."
+              "El suicidio no es un problema moral. Es decir, los que intentan suicidarse no son cobardes ni valientes, sólo son personas que sufren, que están desbordadas por el sufrimiento y que no tienen la más mínima esperanza en el futuro."
+              <span class="block text-xs font-sans not-italic text-on-surface-variant mt-2 text-right">— Bobes, Giner y Saiz (2011)</span>
             </blockquote>
 
-            <h3 class="font-headline text-2xl text-primary mt-10 mb-4">Pautas clave para el acompañamiento y prevención:</h3>
+            <p class="text-base text-on-surface-variant leading-relaxed mb-6">
+              Sin embargo, muchas personas que llevan a cabo una conducta suicida no quieren morirse (de hecho, son muchas más las tentativas suicidas que los suicidios consumados), lo único que quieren es dejar de sufrir y por eso pueden estar contentos de no haber muerto una vez que el sufrimiento se ha controlado (Spirito y Donaldson, 1998).
+            </p>
+
+            <p class="text-base text-on-surface-variant leading-relaxed mb-8">
+              Conocer las señales de alerta puede ayudar a familias y allegados a actuar antes de que sea demasiado tarde. Sin embargo, también es importante señalar que no siempre existen estas verbalizaciones o se observan señales de alarma, ya que hay personas que ocultan su intención de quitarse la vida hasta el final.
+            </p>
+
+            <h3 class="font-headline text-2xl text-primary mt-10 mb-4">Algunas señales de alarma más habituales a las que se debe prestar atención:</h3>
             
-            <ul class="space-y-4 mb-8 text-on-surface-variant">
+            <ul class="space-y-3 mb-10 text-on-surface-variant pl-2">
               <li class="flex items-start gap-3">
-                <span class="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 mt-0.5 text-sm">1</span>
-                <div>
-                  <strong class="text-primary block">Escucha activa y empática sin juicio:</strong>
-                  Brindar un entorno seguro, confidencial y cálido para que la persona pueda expresar su malestar libremente.
-                </div>
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span><strong>Cambios repentinos en los estados de ánimo:</strong> Muchas veces, la persona muestra una mejoría repentina e inexplicable de su estado de ánimo, que puede deberse al alivio que siente al haber tomado ya la decisión de quitarse la vida.</span>
               </li>
               <li class="flex items-start gap-3">
-                <span class="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 mt-0.5 text-sm">2</span>
-                <div>
-                  <strong class="text-primary block">Identificación temprana de señales de alerta:</strong>
-                  Cambios drásticos en el estado de ánimo, aislamiento social prolongado, desinterés generalizado o menciones explícitas de desesperanza.
-                </div>
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>Que la persona comience a abusar de drogas o tome riesgos excesivos.</span>
               </li>
               <li class="flex items-start gap-3">
-                <span class="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 mt-0.5 text-sm">3</span>
-                <div>
-                  <strong class="text-primary block">Derivación y redes de apoyo profesional:</strong>
-                  Contactar tempranamente a profesionales capacitados en psicoterapia basada en evidencia e intervención en crisis.
-                </div>
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>Cambios en los patrones de sueño.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>Bajo rendimiento académico y/o laboral.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>Ausencia de actividad física.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>Abandono de actividades que le resultaban placentera.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>Cambios en la alimentación.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>No querer salir del dormitorio, ni con sus amistades.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span><strong>Conductas de cierre:</strong> Cierre de cuentas bancarias, redes sociales, testamento, despedidas de personas de su entorno, regalar objetos valiosos, etc.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                <span>Que la persona verbalice abiertamente la intención de querer suicidarse.</span>
               </li>
             </ul>
 
-            <p class="text-base text-on-surface-variant leading-relaxed">
-              Para consultas, supervisión clínica o solicitud de atención psicológica confidencial, podés ponerte en contacto directamente con el equipo interdisciplinario de CEDEMOP a través de nuestro formulario oficial.
+            <!-- Sección Clave: ¿Qué decir? -->
+            <div class="my-10 p-8 bg-surface-container rounded-3xl border border-surface-container-highest space-y-6">
+              <h3 class="font-headline text-2xl text-primary flex items-center gap-3">
+                <i class="fas fa-comments text-secondary"></i> ¿Qué decir ante señales de advertencia de suicidio?
+              </h3>
+
+              <div class="space-y-4">
+                <h4 class="font-bold text-primary text-sm uppercase tracking-wider">Frases para iniciar la conversación:</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-on-surface-variant">
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“Tengo la impresión de que no eres tú mismo/a últimamente. Estoy preocupado/a por ti. ¿Podemos hablar?”</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“Quiero respetar tu privacidad, pero estoy preocupado/a por ti”.</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“Sé que has tenido tiempos difíciles recientemente. ¿Puedes contarme qué está sucediendo?”.</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“Realmente me preocupo por ti y puedo percibir que algo está mal. ¿Puedes decirme cómo puedo ayudar?”.</div>
+                </div>
+              </div>
+
+              <div class="space-y-4 pt-4 border-t border-surface-container-highest">
+                <h4 class="font-bold text-primary text-sm uppercase tracking-wider">Frases para ayudar en la conversación:</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-on-surface-variant">
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“¿Desde cuándo te sientes así?”.</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“¿Te has estado sintiendo desesperanzado?”.</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“No estás solo/a en esto. Estoy aquí para ti”.</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“Probablemente no sepa exactamente cómo te sientes, pero me importas y quiero ayudarte”.</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“Sé que te ocurre algo, ¿qué puedo hacer para ayudarte?”.</div>
+                  <div class="p-3 bg-white rounded-2xl border border-surface-container-highest">“Sé que ahora no te parece posible, pero no te sentirás así por siempre. Las cosas van a cambiar”.</div>
+                </div>
+              </div>
+
+              <div class="space-y-3 pt-4 border-t border-surface-container-highest">
+                <h4 class="font-bold text-primary text-sm uppercase tracking-wider">Preguntas directas para hacer:</h4>
+                <ul class="list-disc pl-5 text-xs text-on-surface font-semibold space-y-1">
+                  <li>“¿Estás pensando en hacerte daño?”</li>
+                  <li>“¿Estás pensando en el suicidio?”</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="text-base text-on-surface font-semibold leading-relaxed">
+              Permanece con la persona asegurándote de que permanezca a salvo, y busca contactar con otras personas que puedan ayudarla. En CEDEMOP puedes encontrar profesionales preparados para ayudarte.
             </p>
-          `,
-          docUrl: '#'
+          `
         });
         return;
       }
@@ -230,18 +297,17 @@
           const data = docSnap.data();
           renderArticle({
             title: data.title,
-            category: data.category || 'Artículo de Salud Mental',
+            category: data.category || 'Salud Mental & Prevención',
             author: data.author || 'Equipo CEDEMOP',
             date: data.createdAt ? new Date(data.createdAt.toMillis()).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Reciente',
             imageUrl: data.imageUrl || 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
             content: data.content
           });
         } else {
-          renderError("No se encontró el artículo solicitado.");
+          renderError("No se encontró la publicación solicitada.");
         }
       } catch (error) {
-        console.error("Error al obtener el documento:", error);
-        renderError("Ocurrió un inconveniente al cargar la publicación.");
+        console.error("Error:", error);
       }
     });
 
@@ -251,52 +317,52 @@
       const html = `
         <article class="max-w-[960px] mx-auto px-6">
           
-          <!-- Article Header / Breadcrumb -->
+          <!-- Header / Category & Title -->
           <div class="mb-8 text-center space-y-4">
             <a href="blog.html" class="inline-flex items-center text-xs font-semibold text-secondary hover:text-primary transition-colors uppercase tracking-widest bg-surface-container-highest px-4 py-1.5 rounded-full">
               <i class="fas fa-arrow-left mr-2 text-[10px]"></i> Volver al Blog
             </a>
-            <span class="block text-xs font-bold text-secondary uppercase tracking-widest">${data.category || 'Salud Mental & Ciencia'}</span>
+            <span class="block text-xs font-bold text-secondary uppercase tracking-widest">${data.category || 'Prevención & Salud Mental'}</span>
             <h1 class="font-headline text-3xl md:text-5xl text-primary font-normal leading-tight max-w-3xl mx-auto">
               ${data.title}
             </h1>
             <div class="flex items-center justify-center gap-6 text-xs text-on-surface-variant pt-2 border-t border-surface-container-highest max-w-sm mx-auto">
-              <span class="flex items-center gap-1.5 font-semibold text-primary"><i class="fas fa-user-circle text-secondary"></i> ${data.author || 'Equipo CEDEMOP'}</span>
+              <span class="flex items-center gap-1.5 font-semibold text-primary"><i class="fas fa-user-circle text-secondary"></i> Por ${data.author || 'Equipo CEDEMOP'}</span>
               <span>•</span>
-              <span class="flex items-center gap-1.5"><i class="fas fa-calendar-alt text-secondary"></i> ${data.date || '10 sept. 2023'}</span>
+              <span class="flex items-center gap-1.5"><i class="fas fa-calendar-alt text-secondary"></i> ${data.date || '11 sep. 2023'}</span>
             </div>
           </div>
 
-          <!-- Featured Header Image -->
+          <!-- Featured Image -->
           <div class="w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-ethereal border-4 border-surface mb-12 bg-surface-container">
             <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-full object-cover">
           </div>
 
-          <!-- Article Main Content Box -->
+          <!-- Article Content Body -->
           <div class="bg-surface-container-lowest p-8 md:p-14 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-6 text-on-surface-variant font-body">
             ${data.content}
 
-            <!-- PDF / Material Download Box -->
-            <div class="mt-12 p-6 bg-surface-container rounded-3xl border border-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Contact & Help Box -->
+            <div class="mt-12 p-6 bg-secondary/10 rounded-3xl border border-secondary/20 flex flex-col md:flex-row items-center justify-between gap-4">
               <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
-                  <i class="fas fa-file-pdf text-2xl"></i>
+                <div class="w-12 h-12 rounded-2xl bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
+                  <i class="fas fa-headset text-2xl"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-primary text-base">Guía Clínica de Prevención y Acompañamiento</h4>
-                  <p class="text-xs text-on-surface-variant">Material oficial de CEDEMOP en formato PDF para lectura y consulta profesional.</p>
+                  <h4 class="font-bold text-primary text-base">¿Necesitas asistencia o consulta psicológica?</h4>
+                  <p class="text-xs text-on-surface-variant">En CEDEMOP contamos con profesionales preparados para escucharte y ayudarte.</p>
                 </div>
               </div>
               <a href="contact.html" class="bg-primary text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition-all shadow-md shrink-0">
-                <i class="fas fa-download mr-2"></i> Solicitar PDF
+                Contactar a CEDEMOP
               </a>
             </div>
           </div>
 
-          <!-- Navigation Back Button -->
+          <!-- Back Button -->
           <div class="text-center mt-12">
             <a href="blog.html" class="inline-flex items-center justify-center bg-surface-container text-primary border border-surface-container-highest px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-surface-container-high transition-all shadow-sm">
-              <i class="fas fa-arrow-left mr-2"></i> Explorar Todos los Artículos del Blog
+              <i class="fas fa-arrow-left mr-2"></i> Ver Todos los Artículos del Blog
             </a>
           </div>
 
@@ -309,14 +375,8 @@
     function renderError(message) {
       document.getElementById('article-app').innerHTML = `
         <div class="max-w-md mx-auto py-20 text-center space-y-4">
-          <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-2xl">
-            <i class="fas fa-exclamation-triangle"></i>
-          </div>
-          <h2 class="font-headline text-2xl text-primary">Artículo No Disponible</h2>
-          <p class="text-sm text-on-surface-variant">${message}</p>
-          <a href="blog.html" class="inline-block bg-primary text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider">
-            Volver al Blog
-          </a>
+          <h2 class="font-headline text-2xl text-primary">${message}</h2>
+          <a href="blog.html" class="inline-block bg-primary text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider">Volver al Blog</a>
         </div>
       `;
     }
