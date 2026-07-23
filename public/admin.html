@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración & Gestor - CEDEMOP</title>
+  <title>Panel de Administración & CRM - CEDEMOP</title>
 
   <!-- Tailwind CSS & Custom Config -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -66,7 +66,7 @@
         <a href="aula.html" class="text-sm font-semibold text-primary hover:text-secondary flex items-center gap-2">
           <i class="fas fa-video"></i> Ir al Aula Virtual
         </a>
-        <button id="logout-btn" class="hidden bg-secondary text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-secondary/90 transition-all">
+        <button id="logout-btn" onclick="logoutAdmin()" class="hidden bg-secondary text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-secondary/90 transition-all">
           Cerrar Sesión
         </button>
       </div>
@@ -82,7 +82,7 @@
           <i class="fas fa-user-shield text-2xl"></i>
         </div>
         <h2 class="font-headline text-2xl text-primary font-normal">Acceso Administrativo</h2>
-        <p class="text-xs text-on-surface-variant">Gestión de cursos, artículos y clases en vivo de CEDEMOP.</p>
+        <p class="text-xs text-on-surface-variant">Gestión de publicaciones, cursos, artículos y aula virtual CEDEMOP.</p>
       </div>
 
       <form id="login-form" class="space-y-4">
@@ -102,69 +102,150 @@
         <p id="login-error" class="hidden text-red-600 text-xs font-semibold text-center"></p>
       </form>
 
-      <!-- Botón de Acceso Directo Modo Demo Admin (Si olvidó la contraseña) -->
+      <!-- Botón de Acceso Directo Modo Demo Admin -->
       <div class="pt-4 border-t border-surface-container-highest space-y-3">
-        <p class="text-xs text-center text-on-surface-variant font-medium">¿Olvidaste tu contraseña o estás probando la plataforma?</p>
+        <p class="text-xs text-center text-on-surface-variant font-medium">Acceso rápido para pruebas en servidor local:</p>
         
         <button id="demo-login-btn" onclick="loginDemoAdmin()" class="w-full bg-surface-container text-primary border border-surface-container-highest py-3 rounded-full font-semibold text-xs hover:bg-surface-container-high transition-all flex items-center justify-center gap-2">
-          <i class="fas fa-key text-secondary"></i> Ingresar Modo Demo Admin (1-Clic sin contraseña)
+          <i class="fas fa-key text-secondary"></i> Ingresar Modo Demo Admin (1-Clic)
         </button>
 
         <button onclick="resetPasswordAlert()" class="w-full text-xs text-on-surface-variant underline text-center block hover:text-primary">
-          Enviar enlace de restablecimiento de contraseña por email
+          Enviar enlace de restablecimiento de contraseña
         </button>
       </div>
     </div>
 
-    <!-- Admin Dashboard Section (Visible tras login) -->
+    <!-- Admin Dashboard & CRM Section (Visible tras login) -->
     <div id="dashboard-section" class="hidden space-y-8">
       
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-surface-container p-6 rounded-3xl border border-surface-container-highest shadow-ethereal">
         <div>
-          <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-white px-3 py-1 rounded-full">Panel de Control</span>
-          <h2 class="font-headline text-3xl text-primary mt-2">Gestor de Contenido & Clases</h2>
+          <span class="text-xs font-semibold text-secondary uppercase tracking-widest bg-white px-3 py-1 rounded-full">CRM & Panel de Control</span>
+          <h2 class="font-headline text-3xl text-primary mt-2">Gestor de Contenido, Publicaciones & Medios</h2>
         </div>
-        <a href="aula.html" class="bg-primary text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-md flex items-center gap-2">
-          <i class="fas fa-chalkboard-teacher"></i> Ir a Gestionar Aula Virtual & Videollamadas
-        </a>
+        <div class="flex items-center gap-3">
+          <a href="aula.html" class="bg-primary text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-md flex items-center gap-2">
+            <i class="fas fa-chalkboard-teacher"></i> Aula Virtual
+          </a>
+        </div>
       </div>
 
-      <!-- Formulario de Creación de Contenido (Cursos, Blog, Recursos) -->
+      <!-- Editor Enriquecido Tipo Word / Formulario Multiformato -->
       <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-6">
-        <h3 class="font-headline text-xl text-primary pb-3 border-b border-surface-container-highest">Publicar Nuevo Contenido o Curso</h3>
+        <h3 class="font-headline text-xl text-primary pb-3 border-b border-surface-container-highest flex items-center gap-2">
+          <i class="fas fa-pen-nib text-secondary"></i> Publicar / Editar Artículo o Curso
+        </h3>
 
-        <form id="content-form" class="space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-bold text-primary uppercase mb-1">Título del Contenido / Curso</label>
-              <input type="text" id="title" required class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface" placeholder="Ej: Capacitación en Regulación Emocional">
+        <form id="crm-editor-form" onsubmit="handleSavePublication(event)" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+              <label class="block text-xs font-bold text-primary uppercase mb-1">Título de la Publicación / Curso</label>
+              <input type="text" id="pub-title" required class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface" placeholder="Ej: Estrategias en Regulación Emocional">
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-primary uppercase mb-1">Tipo de Contenido</label>
-              <select id="content-type" class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface">
-                <option value="curso">Curso / Capacitación</option>
+              <label class="block text-xs font-bold text-primary uppercase mb-1">Categoría / Tipo de Destino</label>
+              <select id="pub-category" class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface">
                 <option value="blog">Artículo del Blog</option>
+                <option value="curso">Curso / Taller Internacional</option>
                 <option value="recurso_profesional">Recurso para Profesionales</option>
+                <option value="recurso_paciente">Recurso para Pacientes</option>
               </select>
             </div>
           </div>
 
+          <!-- Barra de Herramientas Estilo Word (WYSIWYG) -->
           <div>
-            <label class="block text-xs font-bold text-primary uppercase mb-1">Descripción / Contenido</label>
-            <textarea id="description" rows="5" class="w-full p-3.5 rounded-xl border border-surface-container-highest text-sm bg-surface" placeholder="Escribe el resumen o contenido detallado..."></textarea>
+            <label class="block text-xs font-bold text-primary uppercase mb-2">Contenido Enriquecido (Editor Estilo Word)</label>
+            
+            <div class="border border-surface-container-highest rounded-2xl overflow-hidden bg-surface">
+              <!-- Toolbar -->
+              <div class="bg-surface-container px-4 py-2.5 border-b border-surface-container-highest flex flex-wrap gap-1.5 items-center text-sm text-primary">
+                <button type="button" onclick="formatDoc('bold')" title="Negrita (Ctrl+B)" class="w-8 h-8 rounded-lg hover:bg-surface-container-high font-bold flex items-center justify-center">B</button>
+                <button type="button" onclick="formatDoc('italic')" title="Cursiva (Ctrl+I)" class="w-8 h-8 rounded-lg hover:bg-surface-container-high italic flex items-center justify-center">I</button>
+                <button type="button" onclick="formatDoc('underline')" title="Subrayado" class="w-8 h-8 rounded-lg hover:bg-surface-container-high underline flex items-center justify-center">U</button>
+                <div class="h-4 w-px bg-surface-container-highest mx-1"></div>
+                <button type="button" onclick="formatDoc('formatBlock', 'h2')" title="Título H2" class="px-2 h-8 rounded-lg hover:bg-surface-container-high font-bold text-xs">H2</button>
+                <button type="button" onclick="formatDoc('formatBlock', 'h3')" title="Título H3" class="px-2 h-8 rounded-lg hover:bg-surface-container-high font-bold text-xs">H3</button>
+                <button type="button" onclick="formatDoc('formatBlock', 'blockquote')" title="Cita Destacada" class="w-8 h-8 rounded-lg hover:bg-surface-container-high flex items-center justify-center"><i class="fas fa-quote-left"></i></button>
+                <div class="h-4 w-px bg-surface-container-highest mx-1"></div>
+                <button type="button" onclick="formatDoc('insertUnorderedList')" title="Lista con viñetas" class="w-8 h-8 rounded-lg hover:bg-surface-container-high flex items-center justify-center"><i class="fas fa-list-ul"></i></button>
+                <button type="button" onclick="formatDoc('insertOrderedList')" title="Lista numerada" class="w-8 h-8 rounded-lg hover:bg-surface-container-high flex items-center justify-center"><i class="fas fa-list-ol"></i></button>
+                <div class="h-4 w-px bg-surface-container-highest mx-1"></div>
+                <button type="button" onclick="insertLinkPrompt()" title="Insertar Enlace" class="w-8 h-8 rounded-lg hover:bg-surface-container-high flex items-center justify-center"><i class="fas fa-link"></i></button>
+                <button type="button" onclick="formatDoc('unlink')" title="Quitar Enlace" class="w-8 h-8 rounded-lg hover:bg-surface-container-high flex items-center justify-center"><i class="fas fa-unlink"></i></button>
+              </div>
+
+              <!-- Editable Canvas -->
+              <div id="rich-editor-canvas" contenteditable="true" class="p-4 min-h-[220px] focus:outline-none text-sm text-on-surface leading-relaxed">
+                Escribe o pega aquí el contenido completo del artículo o curso...
+              </div>
+            </div>
           </div>
 
-          <button type="submit" class="bg-primary text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-md">
-            <i class="fas fa-save mr-2"></i> Guardar y Publicar
-          </button>
+          <!-- Medios Multiformato (Imágenes, Videos, Adjuntos PC) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-surface-container-highest">
+            
+            <!-- Subir / URL Imagen -->
+            <div>
+              <label class="block text-xs font-bold text-primary uppercase mb-1"><i class="fas fa-image mr-1"></i> Imagen de Portada (PC / URL)</label>
+              <input type="file" id="pub-image-file" accept="image/*" onchange="handleImageFileSelect(this)" class="w-full text-xs text-on-surface-variant file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-surface-container file:text-primary hover:file:bg-surface-container-high mb-2">
+              <input type="url" id="pub-image-url" placeholder="O pega URL de imagen (http...)" class="w-full p-2.5 rounded-xl border border-surface-container-highest text-xs bg-surface">
+            </div>
+
+            <!-- Video Embed (YouTube) -->
+            <div>
+              <label class="block text-xs font-bold text-primary uppercase mb-1"><i class="fab fa-youtube text-red-600 mr-1"></i> Video de YouTube (Enlace)</label>
+              <input type="url" id="pub-video-url" placeholder="Ej: https://youtu.be/cVB3brOy4YU" class="w-full p-2.5 rounded-xl border border-surface-container-highest text-xs bg-surface">
+            </div>
+
+            <!-- Archivo Adjunto (PDF / Documento PC) -->
+            <div>
+              <label class="block text-xs font-bold text-primary uppercase mb-1"><i class="fas fa-file-pdf text-secondary mr-1"></i> Material Adjunto (PDF / Doc desde PC)</label>
+              <input type="file" id="pub-doc-file" accept=".pdf,.doc,.docx,.ppt,.pptx" class="w-full text-xs text-on-surface-variant file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-surface-container file:text-primary hover:file:bg-surface-container-high">
+            </div>
+
+          </div>
+
+          <div class="flex justify-end gap-3 pt-2">
+            <button type="button" onclick="resetEditorForm()" class="bg-surface-container text-on-surface-variant px-6 py-3 rounded-full font-semibold text-xs hover:bg-surface-container-high transition-all">
+              Limpiar Formulario
+            </button>
+            <button type="submit" class="bg-primary text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-md flex items-center gap-2">
+              <i class="fas fa-save"></i> Guardar y Publicar en CEDEMOP
+            </button>
+          </div>
         </form>
 
-        <div id="upload-progress" class="hidden space-y-2">
-          <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
-            <div id="progress-bar" class="bg-secondary h-full w-0 transition-all duration-300"></div>
-          </div>
-          <p id="success-message" class="text-xs font-semibold text-emerald-700 text-center">¡Contenido publicado con éxito!</p>
+        <div id="pub-status-msg" class="hidden p-3 bg-emerald-100 text-emerald-800 rounded-2xl text-xs font-semibold text-center">
+          ¡Publicación guardada exitosamente en el sitio!
+        </div>
+      </div>
+
+      <!-- Tabla CRM de Gestión de Publicaciones -->
+      <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-3 border-b border-surface-container-highest">
+          <h3 class="font-headline text-xl text-primary flex items-center gap-2">
+            <i class="fas fa-folder-open text-primary"></i> Publicaciones Guardadas en CRM
+          </h3>
+          <input type="text" id="crm-search" oninput="filterCrmTable()" placeholder="Buscar publicación..." class="p-2.5 rounded-full border border-surface-container-highest text-xs bg-surface w-full md:w-64">
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-on-surface-variant">
+            <thead class="bg-surface-container text-primary font-bold uppercase tracking-wider text-[10px]">
+              <tr>
+                <th class="p-3.5 rounded-l-xl">Título</th>
+                <th class="p-3.5">Categoría</th>
+                <th class="p-3.5">Fecha</th>
+                <th class="p-3.5 text-right rounded-r-xl">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="crm-table-body" class="divide-y divide-surface-container-highest">
+              <!-- JS Injects publications here -->
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -173,16 +254,141 @@
   </main>
 
   <script>
+    let activeImageDataUrl = '';
+
+    function formatDoc(cmd, value = null) {
+      document.execCommand(cmd, false, value);
+    }
+
+    function insertLinkPrompt() {
+      const url = prompt("Ingresa la URL del enlace (https://...):");
+      if (url) {
+        formatDoc("createLink", url);
+      }
+    }
+
+    function handleImageFileSelect(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          activeImageDataUrl = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
     function loginDemoAdmin() {
-      // Activa el modo administrador demo instantáneamente
       document.getElementById('login-section').classList.add('hidden');
       document.getElementById('dashboard-section').classList.remove('hidden');
       document.getElementById('logout-btn').classList.remove('hidden');
+      renderCrmTable();
+    }
+
+    function logoutAdmin() {
+      document.getElementById('login-section').classList.remove('hidden');
+      document.getElementById('dashboard-section').classList.add('hidden');
+      document.getElementById('logout-btn').classList.add('hidden');
     }
 
     function resetPasswordAlert() {
       const email = document.getElementById('email').value || "admin@cedemop.com";
-      alert("Se ha enviado un enlace de restablecimiento de contraseña al correo: " + email + "\n\nSi estás en pruebas locales, también puedes usar el botón 'Ingresar Modo Demo Admin'.");
+      alert("Se ha enviado un enlace de restablecimiento de contraseña al correo: " + email);
+    }
+
+    function handleSavePublication(e) {
+      e.preventDefault();
+      const title = document.getElementById('pub-title').value;
+      const category = document.getElementById('pub-category').value;
+      const content = document.getElementById('rich-editor-canvas').innerHTML;
+      const imageUrlInput = document.getElementById('pub-image-url').value;
+      const videoUrl = document.getElementById('pub-video-url').value;
+
+      const finalImageUrl = activeImageDataUrl || imageUrlInput || 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg';
+
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = content;
+      const plainText = tempDiv.textContent || tempDiv.innerText || "";
+      const summary = plainText.substring(0, 140) + "...";
+
+      const publication = {
+        id: 'pub_' + Date.now(),
+        title: title,
+        category: category === 'blog' ? 'Artículo del Blog' : 'Capacitación & Curso',
+        type: category,
+        content: content,
+        summary: summary,
+        date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }),
+        imageUrl: finalImageUrl,
+        videoUrl: videoUrl,
+        author: 'Equipo CEDEMOP'
+      };
+
+      const publications = JSON.parse(localStorage.getItem('cedemop_published_articles') || '[]');
+      publications.unshift(publication);
+      localStorage.setItem('cedemop_published_articles', JSON.stringify(publications));
+
+      const msg = document.getElementById('pub-status-msg');
+      msg.classList.remove('hidden');
+      setTimeout(() => msg.classList.add('hidden'), 3500);
+
+      resetEditorForm();
+      renderCrmTable();
+    }
+
+    function resetEditorForm() {
+      document.getElementById('pub-title').value = '';
+      document.getElementById('pub-image-url').value = '';
+      document.getElementById('pub-video-url').value = '';
+      document.getElementById('pub-image-file').value = '';
+      document.getElementById('pub-doc-file').value = '';
+      document.getElementById('rich-editor-canvas').innerHTML = 'Escribe o pega aquí el contenido completo...';
+      activeImageDataUrl = '';
+    }
+
+    function renderCrmTable() {
+      const tbody = document.getElementById('crm-table-body');
+      const publications = JSON.parse(localStorage.getItem('cedemop_published_articles') || '[]');
+      
+      if (publications.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-on-surface-variant">No hay publicaciones registradas aún en el CRM. Usá el formulario superior para crear la primera.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = '';
+      publications.forEach((pub, index) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-surface-container/50 transition-colors';
+        tr.innerHTML = `
+          <td class="p-3.5 font-bold text-primary">${pub.title}</td>
+          <td class="p-3.5"><span class="px-2.5 py-1 bg-surface-container text-secondary rounded-full text-[10px] font-bold">${pub.category}</span></td>
+          <td class="p-3.5 text-on-surface-variant">${pub.date}</td>
+          <td class="p-3.5 text-right space-x-2">
+            <a href="article.html?id=${pub.id}" target="_blank" class="px-3 py-1 bg-surface-container text-primary rounded-lg text-xs font-semibold hover:bg-primary hover:text-white transition-colors inline-flex items-center gap-1">
+              <i class="fas fa-eye"></i> Ver
+            </a>
+            <button onclick="deletePublication(${index})" class="px-3 py-1 bg-red-100 text-red-700 rounded-lg text-xs font-semibold hover:bg-red-200 transition-colors inline-flex items-center gap-1">
+              <i class="fas fa-trash"></i> Eliminar
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deletePublication(index) {
+      const publications = JSON.parse(localStorage.getItem('cedemop_published_articles') || '[]');
+      publications.splice(index, 1);
+      localStorage.setItem('cedemop_published_articles', JSON.stringify(publications));
+      renderCrmTable();
+    }
+
+    function filterCrmTable() {
+      const query = document.getElementById('crm-search').value.toLowerCase();
+      const rows = document.querySelectorAll('#crm-table-body tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+      });
     }
   </script>
 

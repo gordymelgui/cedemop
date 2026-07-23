@@ -1,356 +1,326 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artículo - CEDEMOP</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Quill Snow CSS para renderizar el contenido enriquecido correctamente -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    
-    <script src="js/script.js" defer></script>
-    <script type="module" src="js/auth-nav.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Día Mundial de la Prevención del Suicidio - CEDEMOP Blog</title>
 
-    <style>
-        .article-hero {
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: calc(var(--header-height) + 120px) 20px 80px;
-            color: white;
-            text-align: center;
-            border-bottom: 5px solid var(--accent);
-        }
+  <!-- Tailwind CSS & Custom Config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        .article-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6); /* Oscurecer imagen de fondo para mejor lectura */
-            z-index: 1;
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fff8f4",
+            "surface-dim": "#e1d8d2",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f5ece5",
+            "surface-container-high": "#f0e7df",
+            "surface-container-highest": "#eae1da",
+            "on-surface": "#1f1b17",
+            "on-surface-variant": "#414845",
+            "primary": "#15382c",
+            "on-primary": "#ffffff",
+            "secondary": "#904c2f"
+          },
+          borderRadius: {
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          },
+          fontFamily: {
+            "display": ["Libre Caslon Text", "serif"],
+            "headline": ["Libre Caslon Text", "serif"],
+            "body": ["Manrope", "sans-serif"]
+          },
+          boxShadow: {
+            "ethereal": "0 20px 40px rgba(45, 79, 66, 0.08)",
+            "ethereal-hover": "0 30px 60px rgba(45, 79, 66, 0.12)"
+          }
         }
+      }
+    };
+  </script>
 
-        .article-hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+  <style>
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-content {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+  </style>
 
-        .article-hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .article-meta {
-            font-size: 1.1rem;
-            color: #cbd5e1;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .article-body {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 20px;
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text-main);
-        }
-        
-        /* Ajustar el renderizado interno de lo generado por Quill js */
-        .article-body h1, .article-body h2, .article-body h3 {
-            color: var(--primary-dark);
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-
-        .article-body img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .article-body p {
-            margin-bottom: 20px;
-        }
-
-        .article-body blockquote {
-            border-left: 5px solid var(--accent);
-            padding-left: 20px;
-            margin: 30px 0;
-            font-style: italic;
-            color: #64748b;
-            font-size: 1.3rem;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-top: 50px;
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .back-btn:hover {
-            color: var(--accent);
-            transform: translateX(-5px);
-        }
-
-        /* Skeleton loader animado */
-        .skeleton {
-            background-color: #e2e8f0;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            animation: pulse 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-        
-        .skeleton-title { height: 40px; width: 80%; margin: 0 auto 20px; }
-        .skeleton-text { height: 20px; width: 100%; }
-        .skeleton-text.short { width: 70%; }
-    </style>
+  <script src="js/script.js" defer></script>
+  <script type="module" src="js/auth-nav.js" defer></script>
 </head>
 
-<body>
-    <!-- Header -->
-    <header class="site-header glass-header" style="background: rgba(43, 8, 77, 0.95);">
-        <!-- Header container con el menú (Simplificado para el ejemplo) -->
-        <div class="container header-container">
-            <div class="logo">
-                <a href="index.html" class="flex items-center shrink-0 bg-gradient-to-r from-primary via-[#1c4738] to-secondary px-5 py-2.5 rounded-full shadow-md border border-white/25 hover:shadow-ethereal-hover hover:scale-105 transition-all duration-300">
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col selection:bg-primary-fixed selection:text-primary">
+
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-surface-container-highest/60 transition-all duration-300">
+    <div class="flex justify-between items-center px-6 md:px-12 max-w-[1240px] mx-auto py-4 w-full">
+      <a href="index.html" class="flex items-center shrink-0 bg-gradient-to-r from-primary via-[#1c4738] to-secondary px-5 py-2.5 rounded-full shadow-md border border-white/25 hover:shadow-ethereal-hover hover:scale-105 transition-all duration-300">
         <img src="logo.png" alt="CEDEMOP Logo" class="h-9 md:h-11 w-auto object-contain">
       </a>
-            </div>
-            <nav class="main-nav">
-                <button class="mobile-menu-toggle" aria-label="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Cedemop</a>
-                        <ul class="dropdown-content">
-                            <li><a href="about.html">Sobre Nosotros</a></li>
-                            <li><a href="staff.html">Staff</a></li>
-                            <li><a href="corporate.html">Instituciones</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contacto</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Pacientes y Familiares</a>
-                        <ul class="dropdown-content">
-                            <li><a href="psychotherapy.html">Psicoterapia</a></li>
-                            <li><a href="resources_patients.html">Recursos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-trigger">Profesionales</a>
-                        <ul class="dropdown-content">
-                            <li><a href="courses.html">Catálogo de Cursos</a></li>
-                            <li><a href="aula.html">Clase en Vivo (Test)</a></li>
-                            <li><a href="resources_pros.html">Recursos</a></li>
-                            <li><a href="supervision.html">Supervisiones</a></li>
-                        </ul>
-                    </li>
-                    <li id="auth-ui">
-                        <a href="admin.html" class="nav-btn-highlight"><i class="fas fa-user-circle"></i> Ingresar</a>
-                    </li>
-                </ul>
-            </nav>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="font-body text-base text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base font-semibold text-primary border-b-2 border-primary pb-0.5 flex items-center gap-1 py-2">
+            Cedemop <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-52 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="about.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Sobre Nosotros</a>
+            <a href="staff.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Staff Profesional</a>
+            <a href="corporate.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Instituciones</a>
+            <a href="blog.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Blog & Noticias</a>
+            <a href="contact.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Contacto</a>
+          </div>
         </div>
-    </header>
 
-    <!-- MAIN CONTENT INJECTED BY JAVASCRIPT -->
-    <main id="article-app">
-        <!-- Skeleton Loader -->
-        <div class="article-hero" style="background-color: #1e293b;">
-            <div class="article-hero-content">
-                <div class="skeleton skeleton-title"></div>
-                <div class="skeleton skeleton-title" style="width: 50%;"></div>
-            </div>
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Pacientes <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="psychotherapy.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Psicoterapia Online</a>
+            <a href="resources_patients.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Recursos & Libros</a>
+          </div>
         </div>
-        <div class="article-body">
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text short"></div>
-            <br>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text short"></div>
+
+        <div class="relative dropdown">
+          <a href="#" class="font-body text-base text-on-surface-variant hover:text-primary flex items-center gap-1 py-2 transition-colors">
+            Profesionales <i class="fas fa-chevron-down text-xs"></i>
+          </a>
+          <div class="dropdown-content absolute top-full left-0 w-56 bg-white rounded-2xl p-3 shadow-ethereal border border-surface-container-highest">
+            <a href="courses.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Cursos & Talleres</a>
+            <a href="aula.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Aula Virtual & Videollamadas</a>
+            <a href="resources_pros.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Biblioteca Digital</a>
+            <a href="supervision.html" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors">Supervisión Clínica</a>
+          </div>
         </div>
-    </main>
+      </nav>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2024 CEDEMOP. Todos los derechos reservados.</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-    </footer>
+      <!-- Auth UI / CTA -->
+      <div id="auth-ui" class="hidden md:flex items-center gap-4">
+        <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-all shadow-ethereal hover:shadow-ethereal-hover hover:-translate-y-0.5">
+          <i class="fas fa-calendar-check mr-2"></i> Reservar Consulta
+        </a>
+      </div>
 
-    <!-- Firebase Script -->
-    <script type="module">
-        import { db } from './js/firebase-config.js';
-        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-primary p-2 mobile-menu-toggle" aria-label="Menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </header>
 
-        document.addEventListener("DOMContentLoaded", async () => {
-            const articleApp = document.getElementById("article-app");
-            const urlParams = new URLSearchParams(window.location.search);
-            const articleId = urlParams.get('id');
+  <main id="article-app" class="flex-grow pt-28 pb-20">
+    <!-- Article Container (Injected by JS or Default Authentic Content) -->
+  </main>
 
-            if (!articleId) {
-                renderError("Artículo no especificado. Vuelve a la página principal.");
-                return;
-            }
+  <!-- Footer -->
+  <footer class="bg-surface-container-highest text-on-surface w-full mt-auto border-t border-surface-container-high">
+    <div class="flex flex-col items-center gap-8 px-6 py-16 max-w-[1240px] mx-auto w-full text-center">
+      <img src="logo.png" alt="CEDEMOP Logo" class="h-10 w-auto opacity-90 mb-2">
+      <p class="text-xs text-on-surface-variant opacity-75">
+        © 2026 CEDEMOP - Centro de Promoción de Salud Mental. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
 
-            if (articleId === 'suicidio-prevencion') {
-                renderArticle({
-                    title: 'Día Mundial de la Prevención del Suicidio',
-                    author: 'Equipo CEDEMOP',
-                    createdAt: { toMillis: () => 1694400000000 },
-                    imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
-                    content: `
-                        <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
-                            En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
-                        </p>
-                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
-                            La prevención del suicidio requiere un abordaje integral y comunitario. La detección temprana de factores de riesgo, la promoción de espacios de escucha empática y el acompañamiento profesional constante son pilares fundamentales para proteger la vida y generar redes de apoyo efectivas.
-                        </p>
-                        <h3 style="margin-top: 30px; margin-bottom: 15px; color: var(--primary-color);">Pautas clave para el acompañamiento y prevención:</h3>
-                        <ul style="line-height: 2; color: var(--text-main); padding-left: 20px; margin-bottom: 25px;">
-                            <li><strong>Escucha activa sin juicio:</strong> Brindar un espacio seguro para expresar el malestar emocional.</li>
-                            <li><strong>Identificación de señales de alerta:</strong> Cambios drásticos de comportamiento, aislamiento o expresión explícita de desesperanza.</li>
-                            <li><strong>Redes de apoyo profesional:</strong> Derivación a profesionales capacitados en intervención en crisis y psicoterapia.</li>
-                        </ul>
-                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main);">
-                            Para consultas, supervisión clínica o solicitud de atención psicológica, podés ponerte en contacto con el equipo de CEDEMOP a través de nuestra sección de contacto.
-                        </p>
-                    `
-                });
-                return;
-            }
+  <!-- Firebase & Dynamic Article Logic -->
+  <script type="module">
+    import { db } from './js/firebase-config.js';
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-            try {
-                const docRef = doc(db, "blog", articleId);
-                const docSnap = await getDoc(docRef);
+    document.addEventListener("DOMContentLoaded", async () => {
+      const articleApp = document.getElementById("article-app");
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleId = urlParams.get('id') || 'suicidio-prevencion';
 
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    renderArticle(data);
-                } else {
-                    renderArticle({
-                        title: 'Día Mundial de la Prevención del Suicidio',
-                        author: 'Equipo CEDEMOP',
-                        createdAt: { toMillis: () => 1694400000000 },
-                        imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
-                        content: `
-                            <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
-                                En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
-                            </p>
-                            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
-                                La prevención del suicidio requiere un abordaje integral y comunitario. La detección temprana de factores de riesgo, la promoción de espacios de escucha empática y el acompañamiento profesional constante son pilares fundamentales para proteger la vida y generar redes de apoyo efectivas.
-                            </p>
-                        `
-                    });
-                }
-            } catch (error) {
-                console.error("Error al obtener el documento:", error);
-                renderArticle({
-                    title: 'Día Mundial de la Prevención del Suicidio',
-                    author: 'Equipo CEDEMOP',
-                    createdAt: { toMillis: () => 1694400000000 },
-                    imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
-                    content: `
-                        <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-main); margin-bottom: 25px;">
-                            En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
-                        </p>
-                    `
-                });
-            }
-        });
+      // Check LocalStorage first for articles published via Admin CRM
+      const localArticles = JSON.parse(localStorage.getItem('cedemop_published_articles') || '[]');
+      const localArticle = localArticles.find(a => a.id === articleId || a.slug === articleId);
 
-        function renderArticle(data) {
-            const date = data.createdAt ? new Date(data.createdAt.toMillis()).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Reciente';
-            const author = data.author || 'CEDEMOP';
-            const bgImage = data.imageUrl || 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80';
+      if (localArticle) {
+        renderArticle(localArticle);
+        return;
+      }
 
-            // Actualizar el título de la pestaña del navegador
-            document.title = data.title + " - CEDEMOP Blog";
-
-            const html = `
-                <div class="article-hero" style="background-image: url('${bgImage}');">
-                    <div class="article-hero-content">
-                        <h1>${data.title}</h1>
-                        <div class="article-meta">
-                            <span><i class="fas fa-user-circle"></i> Por ${author}</span>
-                            <span><i class="fas fa-calendar-alt"></i> ${date}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="article-body ql-editor">
-                    <!-- Contenido enriquecido de Quill JS (Seguro porque es administrado internamente) -->
-                    ${data.content}
-
-                    ${data.docUrl ? `
-                        <div style="margin-top: 40px; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <h3 style="margin: 0 0 5px 0; color: var(--text-main); font-size: 1.2rem;"><i class="fas fa-file-pdf" style="color: #ef4444; margin-right: 10px;"></i> Material Adjunto</h3>
-                                <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Documento de apoyo para este tema.</p>
-                            </div>
-                            <a href="${data.docUrl}" target="_blank" class="btn-primary" style="padding: 10px 20px;"><i class="fas fa-download"></i> Descargar</a>
-                        </div>
-                    ` : ''}
-
-                    <div style="text-align: center;">
-                        <a href="blog.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver a Todos los Artículos</a>
-                    </div>
-                </div>
-            `;
+      if (articleId === 'suicidio-prevencion') {
+        renderArticle({
+          title: 'Día Mundial de la Prevención del Suicidio',
+          category: 'Prevención & Salud Mental',
+          author: 'Equipo CEDEMOP',
+          date: '10 sept. 2023',
+          imageUrl: 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
+          content: `
+            <p class="text-lg text-on-surface leading-relaxed mb-6 font-medium">
+              En el marco del <strong>Día Mundial de la Prevención del Suicidio</strong>, desde CEDEMOP reafirmamos nuestro compromiso con la sensibilización, formación y prevención clínica en salud mental.
+            </p>
             
-            document.getElementById('article-app').innerHTML = html;
-        }
+            <p class="text-base text-on-surface-variant leading-relaxed mb-6">
+              La prevención del suicidio requiere un abordaje integral, ético y comunitario. La detección temprana de factores de riesgo, la promoción de espacios de escucha empática sin juzgar y el acompañamiento profesional constante son pilares fundamentales para proteger la vida y generar redes de apoyo efectivas.
+            </p>
 
-        function renderError(message) {
-            document.getElementById('article-app').innerHTML = `
-                <div style="padding: 150px 20px; text-align: center; color: var(--text-main);">
-                    <i class="fas fa-exclamation-triangle fa-4x" style="color: #ef4444; margin-bottom: 20px;"></i>
-                    <h2 style="margin-bottom: 10px;">Oops, algo salió mal</h2>
-                    <p style="font-size: 1.2rem; color: var(--text-light);">${message}</p>
-                    <a href="blog.html" class="btn-primary" style="margin-top: 20px; display: inline-block;">Volver al Blog</a>
+            <blockquote class="my-8 p-6 bg-surface-container rounded-3xl border-l-4 border-secondary text-primary font-headline text-xl italic leading-relaxed shadow-sm">
+              "Crear esperanza a través de la acción significa recordar a quienes atraviesan un dolor profundo que existen espacios de contención, profesionales capacitados y redes humanas dispuestas a escuchar."
+            </blockquote>
+
+            <h3 class="font-headline text-2xl text-primary mt-10 mb-4">Pautas clave para el acompañamiento y prevención:</h3>
+            
+            <ul class="space-y-4 mb-8 text-on-surface-variant">
+              <li class="flex items-start gap-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 mt-0.5 text-sm">1</span>
+                <div>
+                  <strong class="text-primary block">Escucha activa y empática sin juicio:</strong>
+                  Brindar un entorno seguro, confidencial y cálido para que la persona pueda expresar su malestar libremente.
                 </div>
-            `;
-        }
-    </script>
-</body>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 mt-0.5 text-sm">2</span>
+                <div>
+                  <strong class="text-primary block">Identificación temprana de señales de alerta:</strong>
+                  Cambios drásticos en el estado de ánimo, aislamiento social prolongado, desinterés generalizado o menciones explícitas de desesperanza.
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 mt-0.5 text-sm">3</span>
+                <div>
+                  <strong class="text-primary block">Derivación y redes de apoyo profesional:</strong>
+                  Contactar tempranamente a profesionales capacitados en psicoterapia basada en evidencia e intervención en crisis.
+                </div>
+              </li>
+            </ul>
 
+            <p class="text-base text-on-surface-variant leading-relaxed">
+              Para consultas, supervisión clínica o solicitud de atención psicológica confidencial, podés ponerte en contacto directamente con el equipo interdisciplinario de CEDEMOP a través de nuestro formulario oficial.
+            </p>
+          `,
+          docUrl: '#'
+        });
+        return;
+      }
+
+      try {
+        const docRef = doc(db, "blog", articleId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          renderArticle({
+            title: data.title,
+            category: data.category || 'Artículo de Salud Mental',
+            author: data.author || 'Equipo CEDEMOP',
+            date: data.createdAt ? new Date(data.createdAt.toMillis()).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Reciente',
+            imageUrl: data.imageUrl || 'imagenes/wp-uploads/WhatsApp-Image-2023-09-10-at-8.17.37-PM-1.jpeg',
+            content: data.content
+          });
+        } else {
+          renderError("No se encontró el artículo solicitado.");
+        }
+      } catch (error) {
+        console.error("Error al obtener el documento:", error);
+        renderError("Ocurrió un inconveniente al cargar la publicación.");
+      }
+    });
+
+    function renderArticle(data) {
+      document.title = data.title + " - CEDEMOP";
+
+      const html = `
+        <article class="max-w-[960px] mx-auto px-6">
+          
+          <!-- Article Header / Breadcrumb -->
+          <div class="mb-8 text-center space-y-4">
+            <a href="blog.html" class="inline-flex items-center text-xs font-semibold text-secondary hover:text-primary transition-colors uppercase tracking-widest bg-surface-container-highest px-4 py-1.5 rounded-full">
+              <i class="fas fa-arrow-left mr-2 text-[10px]"></i> Volver al Blog
+            </a>
+            <span class="block text-xs font-bold text-secondary uppercase tracking-widest">${data.category || 'Salud Mental & Ciencia'}</span>
+            <h1 class="font-headline text-3xl md:text-5xl text-primary font-normal leading-tight max-w-3xl mx-auto">
+              ${data.title}
+            </h1>
+            <div class="flex items-center justify-center gap-6 text-xs text-on-surface-variant pt-2 border-t border-surface-container-highest max-w-sm mx-auto">
+              <span class="flex items-center gap-1.5 font-semibold text-primary"><i class="fas fa-user-circle text-secondary"></i> ${data.author || 'Equipo CEDEMOP'}</span>
+              <span>•</span>
+              <span class="flex items-center gap-1.5"><i class="fas fa-calendar-alt text-secondary"></i> ${data.date || '10 sept. 2023'}</span>
+            </div>
+          </div>
+
+          <!-- Featured Header Image -->
+          <div class="w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-ethereal border-4 border-surface mb-12 bg-surface-container">
+            <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-full object-cover">
+          </div>
+
+          <!-- Article Main Content Box -->
+          <div class="bg-surface-container-lowest p-8 md:p-14 rounded-3xl shadow-ethereal border border-surface-container-highest space-y-6 text-on-surface-variant font-body">
+            ${data.content}
+
+            <!-- PDF / Material Download Box -->
+            <div class="mt-12 p-6 bg-surface-container rounded-3xl border border-surface-container-highest flex flex-col md:flex-row items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                  <i class="fas fa-file-pdf text-2xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-primary text-base">Guía Clínica de Prevención y Acompañamiento</h4>
+                  <p class="text-xs text-on-surface-variant">Material oficial de CEDEMOP en formato PDF para lectura y consulta profesional.</p>
+                </div>
+              </div>
+              <a href="contact.html" class="bg-primary text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition-all shadow-md shrink-0">
+                <i class="fas fa-download mr-2"></i> Solicitar PDF
+              </a>
+            </div>
+          </div>
+
+          <!-- Navigation Back Button -->
+          <div class="text-center mt-12">
+            <a href="blog.html" class="inline-flex items-center justify-center bg-surface-container text-primary border border-surface-container-highest px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-surface-container-high transition-all shadow-sm">
+              <i class="fas fa-arrow-left mr-2"></i> Explorar Todos los Artículos del Blog
+            </a>
+          </div>
+
+        </article>
+      `;
+
+      document.getElementById('article-app').innerHTML = html;
+    }
+
+    function renderError(message) {
+      document.getElementById('article-app').innerHTML = `
+        <div class="max-w-md mx-auto py-20 text-center space-y-4">
+          <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <h2 class="font-headline text-2xl text-primary">Artículo No Disponible</h2>
+          <p class="text-sm text-on-surface-variant">${message}</p>
+          <a href="blog.html" class="inline-block bg-primary text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider">
+            Volver al Blog
+          </a>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
 </html>
